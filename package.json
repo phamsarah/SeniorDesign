@@ -8,8 +8,11 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
+    "@grapecity/spread-excelio": "^13.2.3",
+    "@grapecity/spread-sheets-react": "^13.2.3",
     "date-holidays": "^1.4.12",
     "expo": "^36.0.0",
+    "file-saver": "^2.0.2",
     "firebase": "^7.0.0",
     "firebase-functions": "^3.3.0",
     "lodash": "latest",
