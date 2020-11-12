@@ -45,6 +45,15 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexShrink: 1,
   },
+  contentContainer2: {
+    padding: 20,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    flexShrink: 1,
+    fontSize: 30,
+  },
   hide: {
     display: 'none',
   },
