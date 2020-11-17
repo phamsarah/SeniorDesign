@@ -122,6 +122,15 @@ export class ManageVenues extends React.Component {
         
         </View>
         */}
+        <View style={{ marginTop: 10 }}>
+          <Text> </Text>
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <Text> </Text>
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <Text> </Text>
+        </View>
         <View
           style={{
             flexDirection: 'row',
@@ -154,7 +163,7 @@ export class ManageVenues extends React.Component {
             <Button
               title='Venue'
               onPress={() =>
-                this.props.navigation.navigate('Venue', {
+                this.props.navigation.navigate('Venue2', {
                   database: this.props.database,
                   onSave: (venue) => {
                     this.props.database.addVenue(venue).then((venue) => {
@@ -976,6 +985,11 @@ const VenueStyles = StyleSheet.create({
     flexGrow: 1,
     marginRight: 3,
   },
+  submit: {
+    backgroundColor: '#68a0cf',
+    overflow: 'hidden',
+  },
+
   timeInput: {
     flexGrow: 4,
   },

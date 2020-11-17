@@ -10,6 +10,7 @@ import DayView from './views/DayView';
 import EventView from './views/EventView';
 import MonthView from './views/MonthView';
 import { ManageVenues, VenueView } from './views/VenueViews';
+import { VenueView2 } from './views/VenueViews2';
 import { ClientView, ManageClients } from './views/ClientViews';
 import Database from './Database';
 import Styles from './styles';
@@ -77,6 +78,7 @@ const AppStack = createStackNavigator(
     Day: DayView,
     Event: EventView,
     Venue: VenueView,
+    Venue2: VenueView2,
     VenueManage: ManageVenues,
     Client: ClientView,
     ClientManage: ManageClients,
