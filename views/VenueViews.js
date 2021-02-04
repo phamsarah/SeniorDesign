@@ -102,26 +102,7 @@ export class ManageVenues extends React.Component {
 
           <Text style={VenueStyles.main_font}>(Booking System)</Text>
         </View>
-        {/*<View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <FlatList
-            style={Styles.listContainer}
-            data={this.props.database.venues.map((venue) => {
-              return {
-                key: venue.id,
-                data: venue,
-              };
-            })}
-            renderItem={(data) => this._renderVenue(data.item.data)}
-          />
-        
-        </View>
-        */}
+
         <View style={{ marginTop: 10 }}>
           <Text> </Text>
         </View>
@@ -182,42 +163,7 @@ export class ManageVenues extends React.Component {
             justifyContent: 'center',
           }}
         >
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Button
-              title='Bookings'
-              onPress={() =>
-                this.props.navigation.navigate('Venue', {
-                  database: this.props.database,
-                  onSave: (venue) => {
-                    this.props.database.addVenue(venue).then((venue) => {
-                      this.forceUpdate();
-                    });
-                  },
-                })
-              }
-            />
-          </View>
-
-          <View>
-            <Button
-              title='Documents'
-              onPress={() =>
-                this.props.navigation.navigate('Venue', {
-                  database: this.props.database,
-                  onSave: (venue) => {
-                    this.props.database.addVenue(venue).then((venue) => {
-                      this.forceUpdate();
-                    });
-                  },
-                })
-              }
-            />
-          </View>
+          
         </View>
       </AppContainer>
     );
