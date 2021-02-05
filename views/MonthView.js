@@ -106,13 +106,23 @@ class MonthView extends React.Component {
         return (
             <AppContainer>
                 <View style={Styles.calendarHeader}>
-                    <Dropdown style={Styles.calendarDropdown}
+
+{/*
+data={this.props.database.venues.map((venue) => {
+              return {
+                key: venue.id,
+                data: venue,
+              };
+            })}
+
+                 {/*}   <Dropdown style={Styles.calendarDropdown}
                         options = {this.props.database.venues.map(venue => {
                             return {
                                 label: venue.name,
                                 value: venue.id
                             };
                         })}
+                      
                         selectedValue = {this.props.selectedVenue.id}
                         onValueChange = {venueID => {
                             if (venueID !== null) {
@@ -127,7 +137,7 @@ class MonthView extends React.Component {
                                 console.log(venues);
                             }
                         })}
-                    />
+                    />*/}
                 </View>
                 <CalendarList style={Styles.monthView}
                     horizontal = {true}

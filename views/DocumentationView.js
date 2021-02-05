@@ -1143,19 +1143,6 @@ export function giveProperSize(size) {
 
 export const DocumentationStyles = StyleSheet.create({
   entryContainer: {
-    // backgroundColor: "#fff",
-    // display: "flex",
-    // flex: giveProperSize(SCREEN_HEIGHT),
-    // flexDirection: "column",
-    // fontSize: normalize(24),
-    // padding: 4,
-    // margin: 12,
-    // borderWidth: 1,
-    // borderRadius: 10,
-    // borderColor: "#ccc",
-    // alignItems: "flex-start",
-    // textAlign: "left",
-    // height: 64,
     backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'row',
