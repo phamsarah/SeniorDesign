@@ -54,7 +54,7 @@ This will get the app on TestFlight for all linked testers to test.
 
 2. Build project from expo in terminal with 'sudo expo build:ios'.
 
-3. Log into any Expo account in the VS Code terminal and "archive"
+3. Log into any Expo account in the VS Code terminal and "archive" -> then login with Mikes appstore connect account 
 
 4. Wait for project to build and download the .ipa file from expo when completed.
 
