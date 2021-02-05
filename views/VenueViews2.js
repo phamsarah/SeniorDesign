@@ -53,7 +53,7 @@ export class VenueView2 extends React.Component {
           onPress={() => {
             this.props.navigation.navigate('Month', {
               selectedVenue: venue,
-              database: this.props.database,
+              database: this.props.database
             });
           }}
         >

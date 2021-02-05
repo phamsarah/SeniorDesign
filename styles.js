@@ -24,8 +24,10 @@ export default StyleSheet.create({
 
   calendarHeaderTitle:{
     marginRight: 5,
-    fontSize: 17.5,
-    color: 'red',
+    marginTop: 5,
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
     flexGrow: 1,
     flexBasis: 0,
     textAlign: 'center',
