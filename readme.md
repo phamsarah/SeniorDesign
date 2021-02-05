@@ -54,13 +54,13 @@ This will get the app on TestFlight for all linked testers to test.
 
 2. Build project from expo in terminal with 'sudo expo build:ios'.
 
-3. Log in to Mike's Dev Account for Authentication in the terminal.
+3. Log into any Expo account in the VS Code terminal and "archive"
 
 4. Wait for project to build and download the .ipa file from expo when completed.
 
 5. Download the Transporter app on your Mac.
 
-6. Delever the app to TestFlight. You may have to complete steps 7, 8, and 10 for the app to like to Mike's dev account.
+6. Deliver the app to TestFlight. You may have to complete steps 7, 8, and 10 for the app to like to Mike's dev account.
 
 7. Log in to appstoreconnect.apple.com with Mike's Account.
 
