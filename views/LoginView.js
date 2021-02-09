@@ -27,7 +27,7 @@ export default class LoginView extends React.Component {
 
   _authenticate() {
     Firebase.auth()
-      .signInWithEmailAndPassword(this.state.username, this.state.password)
+      .signInWithEmailAndPassword(this.state.username.toLowerCase(), this.state.password)
       .then(() => {
         this.props.navigation.navigate('Loading');
       })
@@ -51,7 +51,7 @@ export default class LoginView extends React.Component {
               style={Styles.inputBox}
               value={this.state.username}
               placeholder='Email'
-              onChangeText={(value) => this.setState({ username: value })}
+              onChangeText={(value) => this.setState({ username: value})}
             />
           </View>
 

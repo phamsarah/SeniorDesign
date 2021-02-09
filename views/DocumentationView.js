@@ -907,6 +907,7 @@ export default class DocumentationView extends React.Component {
             />
           </View>
         </View>
+        
         <View style={DocumentationStyles.entryContainer}>
           <Text style={DocumentationStyles.entryName}>
             {this.state.banners.bookinglist}
@@ -974,76 +975,8 @@ export default class DocumentationView extends React.Component {
               }}
             />
           </View>
-        </View>
-        <View style={DocumentationStyles.entryContainer}>
-          <Text style={DocumentationStyles.entryName}>
-            {this.state.banners.calendar}
-          </Text>
-          {/* {this.state.display.calendar} */}
-          <View style={DocumentationStyles.entryButton}>
-            <Button
-              title='Send'
-              disabled={this.state.disableSendingCalendar}
-              onPress={() => {
-                Alert.alert(
-                  'Confirmation',
-                  'Are you sure you want to send the calendar for the selected month?',
-                  [
-                    {
-                      text: 'Cancel',
-                    },
-                    {
-                      text: 'OK',
-                      onPress: () => {
-                        this.props.database
-                          .generateSendSaveOne({
-                            type: 'calendar',
-                            venueID: this.props.venue.id,
-                            month: this.props.date.getMonth() + 1,
-                            year: this.props.date.getFullYear(),
-                          })
-                          .then(() => {
-                            alert('Calendar successfully sent!');
-                          })
-                          .catch((err) => {
-                            alert(
-                              'An error occurred while sending the calendar.\n' +
-                                err
-                            );
-                          })
-                          .finally(() => {
-                            this.setState({
-                              disableSendingCalendar: false,
-                              // display: {
-                              //     confirmation: this.state.display.confirmation,
-                              //     invoice: this.state.display.invoice,
-                              //     bookinglist: this.state.display.bookinglist,
-                              //     calendar: this.generateCalendarDisplay(),
-                              //     allConfirmations: this.state.display.allConfirmations,
-                              //     allInvoices: this.state.display.allInvoices
-                              // }
-                            });
-                          });
-
-                        alert(
-                          'The calendar is being generated, saved to the Google Drive, and emailed out.' +
-                            ' Please wait until this has complete before requesting again.' +
-                            ' This may take up to a minute to complete.'
-                        );
-
-                        this.setState({
-                          disableSendingCalendar: true,
-                        });
-                      },
-                    },
-                  ],
-                  { cancelable: true }
-                );
-              }}
-            />
-          </View>
-        </View>
-
+        </View> 
+        
         <View style={DocumentationStyles.entryContainer}>
           <Text style={DocumentationStyles.entryName}>
             {this.state.banners.calendar}
@@ -1210,19 +1143,6 @@ export function giveProperSize(size) {
 
 export const DocumentationStyles = StyleSheet.create({
   entryContainer: {
-    // backgroundColor: "#fff",
-    // display: "flex",
-    // flex: giveProperSize(SCREEN_HEIGHT),
-    // flexDirection: "column",
-    // fontSize: normalize(24),
-    // padding: 4,
-    // margin: 12,
-    // borderWidth: 1,
-    // borderRadius: 10,
-    // borderColor: "#ccc",
-    // alignItems: "flex-start",
-    // textAlign: "left",
-    // height: 64,
     backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'row',

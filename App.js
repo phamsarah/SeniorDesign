@@ -85,7 +85,7 @@ const AppStack = createStackNavigator(
     Documentation: DocumentationView,
   },
   {
-    initialRouteName: 'VenueManage',
+    initialRouteName: 'Venue',
     headerMode: 'none',
     cardOverlayEnabled: true,
   }
