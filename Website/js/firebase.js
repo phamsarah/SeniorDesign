@@ -25,26 +25,33 @@ var firebaseConfig = {
 		  })
 		  .catch((error) => {
 			alert("Incorrect");
+			
 		  });
 
   	}
 
-	/*  firebase.auth().onAuthStateChanged(function(user){
+	  firebase.auth().onAuthStateChanged(function(user){
   
 		if(user){
 		 
 		 var email = user.email;
 		 alert("Active User " + email);
-		 
-		 //Take user to a different or home page
-	  
-		 //is signed in
-		 
+		 if (document.URL.includes("Login")) {
+
+		 }
+
 		}else{
 		 
 		 alert("No Active User");
-		 //no user is signed in
+		 window.location.href="Login.html";
 		}
 
 	});
- */
+
+	function signOut() {
+	firebase.auth().signOut().then(() => {
+		// Sign-out successful.
+	  }).catch((error) => {
+		// An error happened.
+	  })
+	}
