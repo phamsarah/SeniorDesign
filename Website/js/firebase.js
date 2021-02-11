@@ -21,6 +21,7 @@ var firebaseConfig = {
 		.then((userCredentials) => {
 			var user = userCredentials.user;
 			alert("Signed in");
+			window.location.href="pages/Homepage.html"
 		  })
 		  .catch((error) => {
 			alert("Incorrect");
