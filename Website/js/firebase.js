@@ -37,7 +37,7 @@ var firebaseConfig = {
 		 var email = user.email;
 		 if (document.URL.includes("login.html")) {
 			window.location.href="pages/Homepage.html"
-			alert("You've already logged in as " + email);
+			alert("You are already logged in as " + email);
 		 }
 
 		}
