@@ -24,6 +24,7 @@ var firebaseConfig = {
 		  })
 		  .catch((error) => {
 			alert("Incorrect");
+			
 		  });
 
   	}
@@ -34,14 +35,22 @@ var firebaseConfig = {
 		 
 		 var email = user.email;
 		 alert("Active User " + email);
-		 
-		 
-		 
+		 if (document.URL.includes("Login")) {
+
+		 }
+
 		}else{
 		 
 		 alert("No Active User");
-		 window.location.assign("Website/Login.html")
+		 window.location.href="Login.html";
 		}
 
 	});
- 
+
+	function signOut() {
+	firebase.auth().signOut().then(() => {
+		// Sign-out successful.
+	  }).catch((error) => {
+		// An error happened.
+	  })
+	}
