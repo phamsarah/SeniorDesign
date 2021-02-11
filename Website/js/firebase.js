@@ -28,22 +28,20 @@ var firebaseConfig = {
 
   	}
 
-	/*  firebase.auth().onAuthStateChanged(function(user){
+	  firebase.auth().onAuthStateChanged(function(user){
   
 		if(user){
 		 
 		 var email = user.email;
 		 alert("Active User " + email);
 		 
-		 //Take user to a different or home page
-	  
-		 //is signed in
+		 
 		 
 		}else{
 		 
 		 alert("No Active User");
-		 //no user is signed in
+		 window.location.assign("Website/Login.html")
 		}
 
 	});
- */
+ 
