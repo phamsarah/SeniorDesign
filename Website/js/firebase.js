@@ -21,7 +21,7 @@ var firebaseConfig = {
 		.then((userCredentials) => {
 			var user = userCredentials.user;
 			alert("Signed in");
-			window.location.href="pages/Homepage.html";
+			window.location.href="pages/Homepage.html"
 		  })
 		  .catch((error) => {
 			alert("Incorrect");
@@ -35,23 +35,20 @@ var firebaseConfig = {
 		if(user){
 		 
 		 var email = user.email;
-		 alert("Active User " + email);
-		 if (document.URL.includes("Login")) {
-
+		 if (document.URL.includes("login.html")) {
+			window.location.href="pages/Homepage.html"
+			alert("You are already logged in as " + email);
 		 }
 
-		}else{
-		 
-		 alert("No Active User");
-		 window.location.href="Login.html";
 		}
 
 	});
 
 	function signOut() {
 	firebase.auth().signOut().then(() => {
-		// Sign-out successful.
+		alert("You have been signed out");
+		window.location.href="../Login.html"
 	  }).catch((error) => {
-		// An error happened.
+		alert("This is a bug. Screenshot this and send it to team 5")
 	  })
 	}
