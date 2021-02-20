@@ -7,16 +7,29 @@
         body {
             margin: 0;
             font-family: "Lato", sans-serif;
+            background-color:rgb(35, 35, 35);
+            color: rgb(255, 255, 255);
+        }
+
+        h2 {
+            font-size: 200%;
+            color: rgb(255, 255, 255);
+        }
+
+        p {
+            font-size: 200%;
+            color: rgb(255, 255, 255);
         }
 
         .sidebar {
             margin: 0;
             padding: 0;
-            width: 100px;
-            background-color: #DCDCDC;
+            width: 200px;
+            background-color: rgb(60, 156, 255);
             position: fixed;
             height: 100%;
             overflow: auto;
+            font-size: 150%;
         }
 
             .sidebar a {
@@ -27,8 +40,9 @@
             }
 
                 .sidebar a.active {
-                    background-color: #CB2A54;
+                    background-color: rgb(30, 90, 180);
                     color: white;
+                    font-size: 125%;
                 }
 
                 .sidebar a:hover:not(.active) {
@@ -37,14 +51,14 @@
                 }
 
         div.content {
-            margin-left: 100px;
+            margin-left: 200px;
             padding: 1px 16px;
             height: 1000px;
         }
 
         @media screen and (max-width: 1000px) {
             .sidebar {
-                width: 100%;
+                width: 200%;
                 height: auto;
                 position: relative;
             }
@@ -66,11 +80,11 @@
         }
     </style>
 </head>
-<body style="background-color:rgb(50, 80, 128);">
+<body>
 
     <div class="sidebar">
         <a href="Homepage.html">Venue</a>
-		<a class="active" a href="#bookings"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="70" height="70"><br><br>Bookings</a>
+		<a class="active" a href="#bookings"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="140" height="140"><br><br>Bookings</a>
         <a href="Clients.html">Clients</a>
         <a href="Documents.html">Documents</a>
 
@@ -80,15 +94,16 @@
 		<script src="../js/firebase.js"></script>
 
         <center>
-        <input id="signOut" type="button" value="Sign Out" onclick="signOut();" />
+        <input id="signOut" style=font-size:110% type="button" value="Sign Out" onclick="signOut();" />
         </center>
 
     </div>
 
     <div class="content">
-        <h2>MusicMatters Bookings</h2>
-        <p>Bookings will go here</p>
-
+        <center>
+            <h2>MusicMatters Bookings</h2>
+            <p>Bookings will go here</p>
+        </center>
     </div>
 
 
