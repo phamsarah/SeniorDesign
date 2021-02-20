@@ -81,17 +81,18 @@
 </head>
 <body>
 
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <script src="../js/firebase.js"></script>
+
     <div class="sidebar">
         <a class="active" a href="#venue"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="140" height="140"><br><br>Venue</a>
         <!--<a href="#bookings">Bookings</a>-->
 		<a href="Bookings.html">Bookings</a>
         <a href="Clients.html">Clients</a>
         <a href="Documents.html">Documents</a>
-
-        <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		<script src="../js/firebase.js"></script>
 
         <center>
         <input id="signOut" style=font-size:110% type="button" value="Sign Out" onclick="signOut();" />
@@ -103,31 +104,46 @@
             <h2>MusicMatters Venue</h2>
             <p>Calender will go here</p>
         
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		    <script src="../js/firebase.js"></script>
-
             <script>
 
-               // Firebase setup and access
-            
-                var firebaseConfig = {
-                    apiKey: "AIzaSyABrXbvSkA_LqT0zKSTJ3_JHqNcxgyuxsQ",
-                    authDomain: "music-matters-229420.firebaseapp.com",
-                    databaseURL: "https://music-matters-229420.firebaseio.com",
-                    projectId: "music-matters-229420",
-                    storageBucket: "music-matters-229420.appspot.com",
-                    messagingSenderId: "939526187420",
-                    appId: "1:939526187420:web:9bfd8eb38ec627a575c059"
-                };
-                // Initialize Firebase
-                firebase.initializeApp(firebaseConfig);
-            
-                var clientDB = firebase.database().ref('database/clients/')
-                clientDB.on('value', function(snapshot){
-                    console.log(snapshot.val())
-                    display_data(snapshot.val());
+                var currentVal = 1;
+                // var emailDoc;
+
+                var userDataRef = firebase.database().ref("database/venues").orderByKey();
+                userDataRef.once("value").then(function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var key = childSnapshot.key;
+                        var childData = childSnapshot.val();
+
+                        var allConfirmationsLastSent_val = childSnapshot.val().allConfirmationsLastSent; // Works
+                        var allInvoicesLastSent_val = childSnapshot.val().allInvoicesLastSent; // Works
+                        var artistConfirmationSendOut_val = childSnapshot.val().artistConfirmationSendOut; // Works
+                        var artistInvoiceSendOut_val = childSnapshot.val().artistInvoiceSendOut; // Works
+                        var bookingListLastSent_val = childSnapshot.val().bookingListLastSent; // Works
+                        var calendarLastSent_val = childSnapshot.val().calendarLastSent; // Works
+                        var email_val = childSnapshot.val().email; // Works
+                        var monthlyBookingListSendOut_val = childSnapshot.val().monthlyBookingListSendOut; // Works
+                        var monthlyCalendarSendOut_val = childSnapshot.val().monthlyCalendarSendOut; // Works
+                        var name_val = childSnapshot.val().name; // Works
+
+                        console.log("----------------------------------")
+                        console.log("All Confirmations Last Sent #" + currentVal + ": " + allConfirmationsLastSent_val);
+                        console.log("All Invoices Last Sent #" + currentVal + ": " + allInvoicesLastSent_val);
+                        console.log("Artist Confirmation Send Out #" + currentVal + ": " + artistConfirmationSendOut_val);
+                        console.log("Artist Invoice Send Out #" + currentVal + ": " + artistInvoiceSendOut_val);
+                        console.log("Booking List Last Sent #" + currentVal + ": " + bookingListLastSent_val);
+                        console.log("Calendar Last Sent #" + currentVal + ": " + calendarLastSent_val);
+                        console.log("Email: #" + currentVal + ": " + email_val);
+                        console.log("Monthly Booking List Send Out #" + currentVal + ": " + monthlyBookingListSendOut_val);
+                        console.log("Monthly Calendar Send Out #" + currentVal + ": " + monthlyCalendarSendOut_val);
+                        console.log("Name: #" + currentVal + ": " + name_val);
+                        console.log("----------------------------------")
+                        currentVal = currentVal + 1;
+
+                        // emailDoc = document.getElementById("email");
+                        // console.log(emailDoc);
+                        // emailDoc.innerHTML = email_val;
+                    });
                 });
 
             </script>

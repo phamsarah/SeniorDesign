@@ -81,17 +81,18 @@
 </head>
 <body>
 
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <script src="../js/firebase.js"></script>
+
     <div class="sidebar">
 		<a href="Homepage.html">Venue</a>
         <a href="Bookings.html">Bookings</a>
         <a href="Clients.html">Clients</a>
 		<a class="active" a href="#documents"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="140" height="140"><br><br>Documents</a>
         
-        <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		<script src="../js/firebase.js"></script>
-
         <center>
         <input id="signOut" style=font-size:110% type="button" value="Sign Out" onclick="signOut();" />
         </center>
@@ -102,6 +103,9 @@
         <center>
             <h2>MusicMatters Documents</h2>
             <p>Documents will go here</p>
+            
+            <!-- Insert footballGames firebase code here -->
+
         </center>
     </div>
 

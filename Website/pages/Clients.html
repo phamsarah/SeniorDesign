@@ -81,16 +81,19 @@
 </head>
 <body>
 
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <script src="../js/firebase.js"></script>
+
     <div class="sidebar">
         <a href="Homepage.html">Venue</a>
 		<a href="Bookings.html">Bookings</a>
 		<a class="active" a href="#clients"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="140" height="140"><br><br>Clients</a>
         <a href="Documents.html">Documents</a>
 
-        <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		<script src="../js/firebase.js"></script>
+        
 
         <center>
         <input id="signOut" style=font-size:110% type="button" value="Sign Out" onclick="signOut();" />
@@ -102,6 +105,35 @@
         <center>
             <h2>MusicMatters Clients</h2>
             <p>Clients will go here</p>
+
+            <script>
+                var currentVal = 1;
+                // var emailDoc;
+
+                var userDataRef = firebase.database().ref("database/clients").orderByKey();
+                userDataRef.once("value").then(function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var key = childSnapshot.key;
+                        var childData = childSnapshot.val();
+
+                        var email_val = childSnapshot.val().email;
+                        var splitCheck_val = childSnapshot.val().splitCheck;
+                        var stage_val = childSnapshot.val().stage;
+
+                        currentVal = currentVal + 1;
+                        console.log("----------------------------------")
+                        console.log("Email #" + currentVal + ": " + email_val);
+                        console.log("Split Check #" + currentVal + ": " + splitCheck_val);
+                        console.log("Stage Name: #" + currentVal + ": " + stage_val);
+                        console.log("----------------------------------")
+
+                        // emailDoc = document.getElementById("email");
+                        // console.log(emailDoc);
+                        // emailDoc.innerHTML = email_val;
+                    });
+                });
+
+            </script>
         </center>
     </div>
 
