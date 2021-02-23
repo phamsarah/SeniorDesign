@@ -1,3 +1,6 @@
+//This file isn't really used. You're probably looking for firebase.js for firebase functions, 
+//or getFirebaseData for the data displayed on the website from firebase.
+
 firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
 	  // User is signed in.
