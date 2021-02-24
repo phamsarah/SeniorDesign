@@ -6,8 +6,8 @@ const env = Functions.config();
 const gmail = NodeMailer.createTransport({
     service: "gmail",
     auth: {
-        user: env.gmail.email,
-        pass: env.gmail.password
+        user: "Sarahpham999@gmail.com",
+        pass: "Iloveprogramming99"
     },
     pool: true,         // Don't have a separate connection per message
     maxConnections: 1,  // Only one connection to Gmail at a time
