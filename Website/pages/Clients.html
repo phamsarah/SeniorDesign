@@ -25,6 +25,11 @@ will be found here.
             color: rgb(255, 255, 255);
         }
 
+        p2 {
+            font-size: 100%;
+            color: rgb(255, 255, 255);
+        }
+
         .sidebar {
             margin: 0;
             padding: 0;
@@ -111,8 +116,11 @@ will be found here.
             <h2>MusicMatters Clients</h2>
             <p>Clients will go here</p>
 
+            <p2 id="contentDisplay"></p2>
+
             <script>
                 var currentVal = 1;
+                var contentHTML = "";
                 // var emailDoc;
 
                 var userDataRef = firebase.database().ref("database/clients").orderByKey();
@@ -125,12 +133,21 @@ will be found here.
                         var splitCheck_val = childSnapshot.val().splitCheck;
                         var stage_val = childSnapshot.val().stage;
 
-                        currentVal = currentVal + 1;
-                        console.log("----------------------------------")
+                        contentHTML += "----------------------------------"
+                            + "<br>Email #" + currentVal + ": " + email_val 
+                            + "<br>Split Check #" + currentVal + ": " + splitCheck_val
+                            + "<br>Stage Name #" + currentVal + ": " + stage_val
+                            + "<br>----------------------------------<br>";
+
+                        document.getElementById("contentDisplay").innerHTML = contentHTML;
+
+                        console.log("----------------------------------");
                         console.log("Email #" + currentVal + ": " + email_val);
                         console.log("Split Check #" + currentVal + ": " + splitCheck_val);
                         console.log("Stage Name: #" + currentVal + ": " + stage_val);
-                        console.log("----------------------------------")
+                        console.log("----------------------------------");
+
+                        currentVal = currentVal + 1;
 
                         // emailDoc = document.getElementById("email");
                         // console.log(emailDoc);

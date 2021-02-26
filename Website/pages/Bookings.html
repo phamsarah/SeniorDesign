@@ -26,6 +26,11 @@ will be found here.
             color: rgb(255, 255, 255);
         }
 
+        p2 {
+            font-size: 100%;
+            color: rgb(255, 255, 255);
+        }
+
         .sidebar {
             margin: 0;
             padding: 0;
@@ -110,8 +115,11 @@ will be found here.
             <h2>MusicMatters Bookings</h2>
             <p>Bookings will go here</p>
 
+            <p2 id="contentDisplay"></p2>
+
             <script>
                 var currentVal = 1;
+                var contentHTML = "";
                 // var emailDoc;
 
                 var userDataRef = firebase.database().ref("database/events").orderByKey();
@@ -130,6 +138,21 @@ will be found here.
                         var price_val = childSnapshot.val().price; // Works
                         var start_val = childSnapshot.val().start; // Works
                         var venue_val = childSnapshot.val().venue; // Works
+
+                        contentHTML += "----------------------------------"
+                            + "<br>Client ID #" + currentVal + ": " + client_val 
+                            + "<br>Client Name #" + currentVal + ": " + clientName_val
+                            + "<br>Last Confirmation Sent #" + currentVal + ": " + confirmationLastSent_val
+                            + "<br>Client Date #" + currentVal + ": " + date_val
+                            + "<br>Client End Time #" + currentVal + ": " + end_val
+                            + "<br>Client Last Invoice Sent #" + currentVal + ": " + invoiceLastSent_val
+                            + "<br>Month #" + currentVal + ": " + month_val
+                            + "<br>Price #" + currentVal + ": " + price_val
+                            + "<br>Start Time #" + currentVal + ": " + start_val
+                            + "<br>Venue ID #" + currentVal + ": " + venue_val
+                            + "<br>----------------------------------<br>";
+
+                        document.getElementById("contentDisplay").innerHTML = contentHTML;
 
                         console.log("----------------------------------")
                         console.log("Client ID #" + currentVal + ": " + client_val);

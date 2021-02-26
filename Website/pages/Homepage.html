@@ -25,6 +25,11 @@ will be found here.
             color: rgb(255, 255, 255);
         }
 
+        p2 {
+            font-size: 100%;
+            color: rgb(255, 255, 255);
+        }
+
         .sidebar {
             margin: 0;
             padding: 0;
@@ -106,11 +111,15 @@ will be found here.
 
     <div class="content">
         <center>
+
             <h2>MusicMatters Venue</h2>
             <p>Calender will go here</p>
-        
+
+            <p2 id="contentDisplay"></p2>
+
             <script>
 
+                var contentHTML = "";
                 var currentVal = 1;
                 // var emailDoc;
 
@@ -142,14 +151,37 @@ will be found here.
                         console.log("Monthly Booking List Send Out #" + currentVal + ": " + monthlyBookingListSendOut_val);
                         console.log("Monthly Calendar Send Out #" + currentVal + ": " + monthlyCalendarSendOut_val);
                         console.log("Name: #" + currentVal + ": " + name_val);
-                        console.log("----------------------------------")
+                        console.log("----------------------------------");
+                        //console.log(contentHTML);
+
+                        contentHTML += "----------------------------------"
+                            + "<br>All Confirmations Last Sent #" + currentVal + ": " + allConfirmationsLastSent_val 
+                            + "<br>All Invoices Last Sent #" + currentVal + ": " + allInvoicesLastSent_val
+                            + "<br>Artist Confirmation Send out #" + currentVal + ": " + artistConfirmationSendOut_val
+                            + "<br>Artist Invoice Send Out #" + currentVal + ": " + artistInvoiceSendOut_val
+                            + "<br>Booking List Last Sent #" + currentVal + ": " + bookingListLastSent_val
+                            + "<br>Calendar Last Sent #" + currentVal + ": " + calendarLastSent_val
+                            + "<br>Email #" + currentVal + ": " + email_val
+                            + "<br>Monthly Booking List Send Out #" + currentVal + ": " + monthlyBookingListSendOut_val
+                            + "<br>Monthly Calendar Send Out #" + currentVal + ": " + monthlyCalendarSendOut_val
+                            + "<br>Name #" + currentVal + ": " + name_val
+                            + "<br>----------------------------------<br>";
+
+                        document.getElementById("contentDisplay").innerHTML = contentHTML;
+
                         currentVal = currentVal + 1;
+
+                        //document.getElementById("conentDisplay").innerHTML = calContent;
 
                         // emailDoc = document.getElementById("email");
                         // console.log(emailDoc);
                         // emailDoc.innerHTML = email_val;
                     });
                 });
+
+                // contentHTML += "Test";
+
+                //document.getElementById("contentDisplay").innerHTML = contentHTML;
 
             </script>
         </center>
