@@ -27,7 +27,7 @@ will be found here.
 
         p2 {
             font-size: 100%;
-            color: rgb(255, 255, 255);
+            color:rgb(60, 156, 255);
         }
 
         .sidebar {
@@ -63,6 +63,7 @@ will be found here.
             margin-left: 200px;
             padding: 1px 16px;
             height: 1000px;
+            color:rgb(60, 156, 255);
         }
 
         @media screen and (max-width: 1000px) {
@@ -115,13 +116,12 @@ will be found here.
         <center>
             <h2>MusicMatters Clients</h2>
             <p>Clients will go here</p>
-
+        </center>
             <p2 id="contentDisplay"></p2>
 
             <script>
                 var currentVal = 1;
                 var contentHTML = "";
-                // var emailDoc;
 
                 var userDataRef = firebase.database().ref("database/clients").orderByKey();
                 userDataRef.once("value").then(function(snapshot) {
@@ -131,32 +131,34 @@ will be found here.
 
                         var email_val = childSnapshot.val().email;
                         var splitCheck_val = childSnapshot.val().splitCheck;
+                        if (splitCheck_val == false) {
+                            splitCheck_val = "No Split Check";
+                        }
+                        else {
+                            splitCheck_val = "Split Check";
+                        }
                         var stage_val = childSnapshot.val().stage;
+                        var performers_val = childSnapshot.val().performers;
+                        var bio_val = childSnapshot.val().bio;
+                        if ((bio_val == undefined) || (bio_val == "") || (bio_val == "\n"))
+                        {
+                            bio_val = 'No Biography Added';
+                        }
 
                         contentHTML += "----------------------------------"
-                            + "<br>Email #" + currentVal + ": " + email_val 
-                            + "<br>Split Check #" + currentVal + ": " + splitCheck_val
+                            + "<br>Performer Name: " + performers_val
                             + "<br>Stage Name #" + currentVal + ": " + stage_val
-                            + "<br>----------------------------------<br>";
+                            + "<br>Bio: " + bio_val
+                            + "<br>Email : " + email_val 
+                            + "<br>" + splitCheck_val
+                            + "<br>";//----------------------------------<br>";
 
                         document.getElementById("contentDisplay").innerHTML = contentHTML;
-
-                        console.log("----------------------------------");
-                        console.log("Email #" + currentVal + ": " + email_val);
-                        console.log("Split Check #" + currentVal + ": " + splitCheck_val);
-                        console.log("Stage Name: #" + currentVal + ": " + stage_val);
-                        console.log("----------------------------------");
-
                         currentVal = currentVal + 1;
-
-                        // emailDoc = document.getElementById("email");
-                        // console.log(emailDoc);
-                        // emailDoc.innerHTML = email_val;
                     });
                 });
 
             </script>
-        </center>
     </div>
 
 </body>

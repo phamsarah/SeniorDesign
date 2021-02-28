@@ -28,7 +28,7 @@ will be found here.
 
         p2 {
             font-size: 100%;
-            color: rgb(255, 255, 255);
+            color:rgb(60, 156, 255);
         }
 
         .sidebar {
@@ -64,6 +64,7 @@ will be found here.
             margin-left: 200px;
             padding: 1px 16px;
             height: 1000px;
+            color:rgb(60, 156, 255);
         }
 
         @media screen and (max-width: 1000px) {
@@ -114,13 +115,12 @@ will be found here.
         <center>
             <h2>MusicMatters Bookings</h2>
             <p>Bookings will go here</p>
-
+        </center>
             <p2 id="contentDisplay"></p2>
 
             <script>
                 var currentVal = 1;
                 var contentHTML = "";
-                // var emailDoc;
 
                 var userDataRef = firebase.database().ref("database/events").orderByKey();
                 userDataRef.once("value").then(function(snapshot) {
@@ -130,52 +130,47 @@ will be found here.
 
                         var client_val = childSnapshot.val().client; // Works
                         var clientName_val = childSnapshot.val().clientName; // Names are empty in database, so unsure if it works
+                        if (clientName_val == "") {
+                            clientName_val = "No name assigned";
+                        }
                         var confirmationLastSent_val = childSnapshot.val().confirmationLastSent; // Works
+                        if (confirmationLastSent_val == "") {
+                            confirmationLastSent_val = "Never";
+                        }
                         var date_val = childSnapshot.val().date; // Works
                         var end_val = childSnapshot.val().end; // Works
                         var invoiceLastSent_val = childSnapshot.val().invoiceLastSent; // Works
+                        if (invoiceLastSent_val == "") {
+                            invoiceLastSent_val = "Never";
+                        }
                         var month_val = childSnapshot.val().month; // Works
                         var price_val = childSnapshot.val().price; // Works
+                        if (price_val == 0) {
+                            price_val = "No Price Assigned";
+                        }
                         var start_val = childSnapshot.val().start; // Works
                         var venue_val = childSnapshot.val().venue; // Works
 
                         contentHTML += "----------------------------------"
-                            + "<br>Client ID #" + currentVal + ": " + client_val 
-                            + "<br>Client Name #" + currentVal + ": " + clientName_val
-                            + "<br>Last Confirmation Sent #" + currentVal + ": " + confirmationLastSent_val
-                            + "<br>Client Date #" + currentVal + ": " + date_val
-                            + "<br>Client End Time #" + currentVal + ": " + end_val
-                            + "<br>Client Last Invoice Sent #" + currentVal + ": " + invoiceLastSent_val
-                            + "<br>Month #" + currentVal + ": " + month_val
-                            + "<br>Price #" + currentVal + ": " + price_val
-                            + "<br>Start Time #" + currentVal + ": " + start_val
-                            + "<br>Venue ID #" + currentVal + ": " + venue_val
-                            + "<br>----------------------------------<br>";
+                            + "<br>Client #" + currentVal
+                            + "<br>Client Name: " + clientName_val
+                            + "<br>Client ID: " + client_val
+                            + "<br>Venue ID: " + venue_val
+                            + "<br>Price: " + price_val
+                            + "<br>Date: " + date_val
+                            + "<br>Month: " + month_val
+                            + "<br>Start Time: " + start_val
+                            + "<br>End Time: " + end_val
+                            + "<br>Last Invoice Sent: " + invoiceLastSent_val
+                            + "<br>Last Confirmation Sent: " + confirmationLastSent_val
+                            + "<br>";//----------------------------------<br>";
 
                         document.getElementById("contentDisplay").innerHTML = contentHTML;
-
-                        console.log("----------------------------------")
-                        console.log("Client ID #" + currentVal + ": " + client_val);
-                        console.log("Client Name #" + currentVal + ": " + clientName_val);
-                        console.log("Last Confirmation Sent: #" + currentVal + ": " + confirmationLastSent_val);
-                        console.log("Client Date #" + currentVal + ": " + date_val);
-                        console.log("Client End Time #" + currentVal + ": " + end_val);
-                        console.log("Client Last Invoice Sent #" + currentVal + ": " + invoiceLastSent_val);
-                        console.log("Client Month #" + currentVal + ": " + month_val);
-                        console.log("Client Price #" + currentVal + ": " + price_val);
-                        console.log("Client Start Time #" + currentVal + ": " + start_val);
-                        console.log("Client Venue ID #" + currentVal + ": " + venue_val);
-                        console.log("----------------------------------")
                         currentVal = currentVal + 1;
-
-                        // emailDoc = document.getElementById("email");
-                        // console.log(emailDoc);
-                        // emailDoc.innerHTML = email_val;
                     });
                 });
 
             </script>
-        </center>
     </div>
 
 
