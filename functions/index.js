@@ -125,6 +125,11 @@ exports.generateSendSaveOne = Functions.https.onCall((data) => {
     });
 });
 
+// TEST FIREBASE FUNCTION
+exports.testFunction = Functions.https.onCall((data) => {
+    console.log("THIS WORKS");
+});
+
 /*
  * Firebase functions that calls the local genSendSaveAll function
  */
