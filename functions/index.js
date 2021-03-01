@@ -1,5 +1,5 @@
 const Functions = require('firebase-functions');
-const Admin = require("firebase-admin");
+const Admin = require('firebase-admin');
 const Email = require("./handlers/emailHandler.js");
 const PDF = require("./handlers/pdfHandler.js");
 const Drive = require("./handlers/driveHandler.js");
@@ -123,6 +123,11 @@ exports.generateSendSaveOne = Functions.https.onCall((data) => {
                 reject(err);
         });
     });
+});
+
+// TEST FIREBASE FUNCTION
+exports.testFunction = Functions.https.onCall((data) => {
+    console.log("THIS WORKS");
 });
 
 /*
