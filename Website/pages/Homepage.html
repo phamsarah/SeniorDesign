@@ -26,8 +26,8 @@ will be found here.
         }
 
         p2 {
-            font-size: 100%;
-            color: rgb(255, 255, 255);
+            font-size: 120%;
+            color:rgb(60, 156, 255);
         }
 
         .sidebar {
@@ -111,80 +111,58 @@ will be found here.
 
     <div class="content">
         <center>
-
             <h2>MusicMatters Venue</h2>
-            <p>Calender will go here</p>
-
-            <p2 id="contentDisplay"></p2>
-
-            <script>
-
-                var contentHTML = "";
-                var currentVal = 1;
-                // var emailDoc;
-
-                var userDataRef = firebase.database().ref("database/venues").orderByKey();
-                userDataRef.once("value").then(function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                        var key = childSnapshot.key;
-                        var childData = childSnapshot.val();
-
-                        var allConfirmationsLastSent_val = childSnapshot.val().allConfirmationsLastSent; // Works
-                        var allInvoicesLastSent_val = childSnapshot.val().allInvoicesLastSent; // Works
-                        var artistConfirmationSendOut_val = childSnapshot.val().artistConfirmationSendOut; // Works
-                        var artistInvoiceSendOut_val = childSnapshot.val().artistInvoiceSendOut; // Works
-                        var bookingListLastSent_val = childSnapshot.val().bookingListLastSent; // Works
-                        var calendarLastSent_val = childSnapshot.val().calendarLastSent; // Works
-                        var email_val = childSnapshot.val().email; // Works
-                        var monthlyBookingListSendOut_val = childSnapshot.val().monthlyBookingListSendOut; // Works
-                        var monthlyCalendarSendOut_val = childSnapshot.val().monthlyCalendarSendOut; // Works
-                        var name_val = childSnapshot.val().name; // Works
-
-                        console.log("----------------------------------")
-                        console.log("All Confirmations Last Sent #" + currentVal + ": " + allConfirmationsLastSent_val);
-                        console.log("All Invoices Last Sent #" + currentVal + ": " + allInvoicesLastSent_val);
-                        console.log("Artist Confirmation Send Out #" + currentVal + ": " + artistConfirmationSendOut_val);
-                        console.log("Artist Invoice Send Out #" + currentVal + ": " + artistInvoiceSendOut_val);
-                        console.log("Booking List Last Sent #" + currentVal + ": " + bookingListLastSent_val);
-                        console.log("Calendar Last Sent #" + currentVal + ": " + calendarLastSent_val);
-                        console.log("Email: #" + currentVal + ": " + email_val);
-                        console.log("Monthly Booking List Send Out #" + currentVal + ": " + monthlyBookingListSendOut_val);
-                        console.log("Monthly Calendar Send Out #" + currentVal + ": " + monthlyCalendarSendOut_val);
-                        console.log("Name: #" + currentVal + ": " + name_val);
-                        console.log("----------------------------------");
-                        //console.log(contentHTML);
-
-                        contentHTML += "----------------------------------"
-                            + "<br>All Confirmations Last Sent #" + currentVal + ": " + allConfirmationsLastSent_val 
-                            + "<br>All Invoices Last Sent #" + currentVal + ": " + allInvoicesLastSent_val
-                            + "<br>Artist Confirmation Send out #" + currentVal + ": " + artistConfirmationSendOut_val
-                            + "<br>Artist Invoice Send Out #" + currentVal + ": " + artistInvoiceSendOut_val
-                            + "<br>Booking List Last Sent #" + currentVal + ": " + bookingListLastSent_val
-                            + "<br>Calendar Last Sent #" + currentVal + ": " + calendarLastSent_val
-                            + "<br>Email #" + currentVal + ": " + email_val
-                            + "<br>Monthly Booking List Send Out #" + currentVal + ": " + monthlyBookingListSendOut_val
-                            + "<br>Monthly Calendar Send Out #" + currentVal + ": " + monthlyCalendarSendOut_val
-                            + "<br>Name #" + currentVal + ": " + name_val
-                            + "<br>----------------------------------<br>";
-
-                        document.getElementById("contentDisplay").innerHTML = contentHTML;
-
-                        currentVal = currentVal + 1;
-
-                        //document.getElementById("conentDisplay").innerHTML = calContent;
-
-                        // emailDoc = document.getElementById("email");
-                        // console.log(emailDoc);
-                        // emailDoc.innerHTML = email_val;
-                    });
-                });
-
-                // contentHTML += "Test";
-
-                //document.getElementById("contentDisplay").innerHTML = contentHTML;
-
-            </script>
+            <!--<p>Calender will go here</p>-->
+            <object style="width:100%;height:120vh;" type="text/html" data="Calendar.html"></object>
         </center>
+
+        <p2 id="contentDisplay"></p2>
+
+        <script>
+            var contentHTML = "";
+            var currentVal = 1;
+
+            var userDataRef = firebase.database().ref("database/venues").orderByKey();
+            userDataRef.once("value").then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key;
+                    var childData = childSnapshot.val();
+
+                    var allConfirmationsLastSent_val = childSnapshot.val().allConfirmationsLastSent; // Works
+                    var allInvoicesLastSent_val = childSnapshot.val().allInvoicesLastSent; // Works
+                    var artistConfirmationSendOut_val = childSnapshot.val().artistConfirmationSendOut; // Works
+                    var artistInvoiceSendOut_val = childSnapshot.val().artistInvoiceSendOut; // Works
+                    var bookingListLastSent_val = childSnapshot.val().bookingListLastSent; // Works
+                    var calendarLastSent_val = childSnapshot.val().calendarLastSent; // Works
+                    var email_val = childSnapshot.val().email; // Works
+                    var monthlyBookingListSendOut_val = childSnapshot.val().monthlyBookingListSendOut; // Works
+                    var monthlyCalendarSendOut_val = childSnapshot.val().monthlyCalendarSendOut; // Works
+                    var name_val = childSnapshot.val().name; // Works
+
+                    contentHTML += "----------------------------------"
+                        + "<br>Venue #" + currentVal + ": " + name_val
+                        + "<br>Venue Email: " + email_val
+                        + "<br>All Confirmations Last Sent: " + allConfirmationsLastSent_val 
+                        + "<br>All Invoices Last Sent: " + allInvoicesLastSent_val
+                        + "<br>Artist Confirmation Send out: " + artistConfirmationSendOut_val
+                        + "<br>Artist Invoice Send Out: " + artistInvoiceSendOut_val
+                        + "<br>Booking List Last Sent: " + bookingListLastSent_val
+                        + "<br>Calendar Last Sent: " + calendarLastSent_val
+                        + "<br>Monthly Booking List Send Out: " + monthlyBookingListSendOut_val
+                        + "<br>Monthly Calendar Send Out: " + monthlyCalendarSendOut_val
+                        //+ "<br>Venue Name: " + name_val
+                        + "<br>";//----------------------------------<br>";
+
+                    document.getElementById("contentDisplay").innerHTML = contentHTML;
+                    currentVal = currentVal + 1;
+                });
+            });
+
+            // contentHTML += "Test";
+
+            //document.getElementById("contentDisplay").innerHTML = contentHTML;
+
+        </script>
     </div>
 
 </body>
