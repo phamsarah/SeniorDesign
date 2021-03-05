@@ -2,18 +2,29 @@ const Functions = require('firebase-functions/lib/index');
 const NodeMailer = require("nodemailer");
 const Util = require("../util.js");
 
-const env = Functions.config();
-const gmail = NodeMailer.createTransport({
-    service: "gmail",
+//const env = Functions.config();
+let gmail = NodeMailer.createTransport({
+    service: 'gmail',
+    port: 465,
+    secure:true,
     auth: {
-        user: "Sarahpham999@gmail.com",
-        pass: "Iloveprogramming99"
+        user: 'Sarahpham999',
+        pass: 'iloveprogramming99'
     },
-    pool: true,         // Don't have a separate connection per message
-    maxConnections: 1,  // Only one connection to Gmail at a time
-    maxMessages: 5,     // 5 emails per connection
-    rateDelta: 5000,    // Within a 5 seconds limit...
-    rateLimit: 1        // Only send one email
+});
+
+let mailOptions = {
+    from: 'sarahpham999@gmail.com',
+    to: 'Sarahpham9999@gmail.com',
+    subject: 'valorant',
+    text: 'foo?',
+};
+
+gmail.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    return log('email sent!');
 });
 
 const sendEmail = function (data) {
@@ -32,7 +43,7 @@ const sendEmail = function (data) {
         });
     });
 };
-exports.sendEmail = sendEmail;
+//exports.sendEmail = sendEmail;
 
 exports.sendArtistConfirmation = function (event, client, venue, pdf) {
     return new Promise((resolve, reject) => {

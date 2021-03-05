@@ -1,4 +1,5 @@
 const Functions = require('firebase-functions');
+const NodeMailer = require("nodemailer");
 const Admin = require('firebase-admin');
 const Email = require("./handlers/emailHandler.js");
 const PDF = require("./handlers/pdfHandler.js");
@@ -7,7 +8,16 @@ const Util = require("./util.js");
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-Admin.initializeApp();
+//serviceAccount = require('./serviceAccount.json');
+
+//const adminConfig = JSON.parse(process.env.FIREBASE_CONFIG);
+//adminConfig.credential = admin.credential.cert(serviceAccount);
+//Admin.initializeApp(adminConfig);
+
+Admin.initializeApp({
+    databaseURL: "https://music-matters-229420.firebaseio.com",
+    projectId: "music-matters-229420",});
+
 const db = Admin.database();
 const eventDB = db.ref("database/events");
 const clientDB = db.ref("database/clients");
@@ -15,6 +25,39 @@ const venueDB = db.ref("database/venues");
 const footballGamesDB = db.ref("database/footballGames");
 
 const VALID_TYPES = ["artist_confirmation", "invoice", "booking_list", "calendar"];
+
+let gmail = NodeMailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: "Sarahpham999@gmail.com",
+        pass: "iloveprogramming99"
+    },
+
+});
+
+let mailOptions = {
+    from: 'sarahpham999@gmail.com',
+    to: 'Sarahpham9999@gmail.com',
+    subject: 'valorant',
+    text: 'foo?',
+};
+
+gmail.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);   
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+    res.render('contact', {msg:'Email has been sent'});
+});
+
+// TEST FIREBASE FUNCTION
+exports.sarahTest = Functions.https.onRequest(async (req, res) => {
+    return gmail.sendMail(mailOptions);
+});
 
 /*
  * Firebase function that checks each venue's prefences are 0800 CST every day to see if 
@@ -125,10 +168,7 @@ exports.generateSendSaveOne = Functions.https.onCall((data) => {
     });
 });
 
-// TEST FIREBASE FUNCTION
-exports.testFunction = Functions.https.onCall((data) => {
-    console.log("THIS WORKS");
-});
+
 
 /*
  * Firebase functions that calls the local genSendSaveAll function
