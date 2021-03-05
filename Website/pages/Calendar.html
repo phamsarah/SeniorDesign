@@ -59,7 +59,36 @@
       googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
 
       // US Holidays
-      events: 'en.usa#holiday@group.v.calendar.google.com',
+
+      events: 'en.usa#holiday@group.v.calendar.google.com' ,
+
+      /*
+      eventSources: [
+      {
+        googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
+        className: 'holiday',
+        color: 'lightblue'
+      },
+      {
+        function for firebase data,
+        className: 'firebase',
+        textColor: 'black'
+        overlap: false
+      }
+      {
+      googleCalendarId: whatever the foodball games are,
+        className: football,
+        
+        can you have if statements in these?
+
+        if (name has 'Tigers')
+          color: 'orange'
+        if (name has 'Alabama')
+          color: 'red'
+      }
+    ],
+      
+      */
 
       eventClick: function(arg) {
         // opens events in a popup window
