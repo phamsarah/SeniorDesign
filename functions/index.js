@@ -8,12 +8,6 @@ const Util = require("./util.js");
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-//serviceAccount = require('./serviceAccount.json');
-
-//const adminConfig = JSON.parse(process.env.FIREBASE_CONFIG);
-//adminConfig.credential = admin.credential.cert(serviceAccount);
-//Admin.initializeApp(adminConfig);
-
 Admin.initializeApp({
     databaseURL: "https://music-matters-229420.firebaseio.com",
     projectId: "music-matters-229420",});
@@ -26,37 +20,14 @@ const footballGamesDB = db.ref("database/footballGames");
 
 const VALID_TYPES = ["artist_confirmation", "invoice", "booking_list", "calendar"];
 
-let gmail = NodeMailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user: "Sarahpham999@gmail.com",
-        pass: "iloveprogramming99"
-    },
-
-});
-
-let mailOptions = {
-    from: 'sarahpham999@gmail.com',
-    to: 'Sarahpham9999@gmail.com',
-    subject: 'valorant',
-    text: 'foo?',
-};
-
-gmail.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);   
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-    res.render('contact', {msg:'Email has been sent'});
-});
 
 // TEST FIREBASE FUNCTION
-exports.sarahTest = Functions.https.onRequest(async (req, res) => {
-    return gmail.sendMail(mailOptions);
+exports.sarahTest = Functions.https.onCall((data, context) => {
+    //return Email.sendEmailTest();
+    return(genSendSaveOne(data)); 
+    // processEvent(data.eventID).then(processedData => {
+    //     return generateSendSaveConfirmation(processedData.event, processedData.client, processedData.venue)
+    // }).then(handleSuccess).catch(handleError);
 });
 
 /*
@@ -150,7 +121,7 @@ exports.docSendOut = Functions.pubsub.schedule("every day 08:00")
                 resolve(completedJobs);
             }).catch(err => {
                 reject(err);
-            });
+            });a
         });
     });
 

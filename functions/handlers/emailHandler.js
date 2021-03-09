@@ -15,9 +15,14 @@ let gmail = NodeMailer.createTransport({
 
 let mailOptions = {
     from: 'sarahpham999@gmail.com',
-    to: 'Sarahpham9999@gmail.com',
-    subject: 'valorant',
-    text: 'foo?',
+    text: 'PLEASE WORK',
+}
+
+exports.sendEmailTest = function (event, client, venue){
+    mailOptions.to = client.email;
+    mailOptions.subject = venue.name + " - Artist Confirmation"
+
+    return gmail.sendMail(mailOptions);
 };
 
 gmail.sendMail(mailOptions, (error, info) => {
@@ -78,7 +83,7 @@ exports.sendInvoice = function (event, client, venue, pdf) {
             "Please don't hesitate to reply back to this email if you have any questions." +
             "\n\nThanks,\nMusic Matters Bookings";
         return sendEmail({
-            to: [venue.email, venue.emaillist],
+            to: client.email,
             subject: emailSubject,
             text: emailBody,
             attachments: [

@@ -27,6 +27,7 @@ import Dropdown from '../components/Dropdown';
 import TimeInput from '../components/TimeInput';
 import AppContainer from '../components/AppContainer';
 import { Dimensions, Platform, PixelRatio } from 'react-native';
+import firebase from 'firebase';
 
 @withMappedNavigationProps()
 export default class DocumentationView extends React.Component {
@@ -639,6 +640,11 @@ export default class DocumentationView extends React.Component {
                     {
                       text: 'OK',
                       onPress: () => {
+                        // this.props.database.sarahTest({
+                        //   type: 'artist_confirmation',
+                        //   eventID: this.props.event.id,
+                        // })
+
                         this.props.database
                           .generateSendSaveOne({
                             type: 'artist_confirmation',
@@ -653,29 +659,6 @@ export default class DocumentationView extends React.Component {
                                 err
                             );
                           })
-                          .finally(() => {
-                            this.setState({
-                              disableSendingConfirmation: false,
-                              // display: {
-                              //     confirmation: this.generateArtistConfirmationDisplay(),
-                              //     invoice: this.state.display.invoice,
-                              //     bookinglist: this.state.bookinglist,
-                              //     calendar: this.state.display.calendar,
-                              //     allConfirmations: this.state.display.allConfirmations,
-                              //     allInvoices: this.state.display.allInvoices
-                              // }
-                            });
-                          });
-
-                        alert(
-                          'The artist confirmation is being generated, saved to the Google Drive, and emailed out.' +
-                            ' Please wait until this has complete before requesting again.' +
-                            ' This may take up to a minute to complete.'
-                        );
-
-                        this.setState({
-                          disableSendingConfirmation: true,
-                        });
                       },
                     },
                   ],
