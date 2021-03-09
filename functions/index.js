@@ -23,11 +23,9 @@ const VALID_TYPES = ["artist_confirmation", "invoice", "booking_list", "calendar
 
 // TEST FIREBASE FUNCTION
 exports.sarahTest = Functions.https.onCall((data, context) => {
-    //return Email.sendEmailTest();
-    return(genSendSaveOne(data)); 
-    // processEvent(data.eventID).then(processedData => {
-    //     return generateSendSaveConfirmation(processedData.event, processedData.client, processedData.venue)
-    // }).then(handleSuccess).catch(handleError);
+    processEvent(data.eventID).then(processedData => {
+        return generateSendSaveInvoice(processedData.event, processedData.client, processedData.venue)
+    }).then(handleSuccess).catch(handleError);
 });
 
 /*
@@ -415,7 +413,7 @@ const generateSendSaveInvoice = function(event, client, venue) {
         const pdf1 = PDF.generateInvoice(event, client, venue);
         const pdf2 = PDF.generateInvoice(event, client, venue);
         return Promise.all([
-            Email.sendInvoice(event, client, venue, pdf1),
+            //Email.sendInvoice(event, client, venue, pdf1),
             Drive.uploadInvoice(event, client, venue, pdf2)
         ]).then(pdfs => {
             return eventDB.child(event.id).update({invoiceLastSent: new Date().toString()});

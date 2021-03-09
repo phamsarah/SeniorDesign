@@ -695,7 +695,7 @@ export default class DocumentationView extends React.Component {
                       text: 'OK',
                       onPress: () => {
                         this.props.database
-                          .generateSendSaveOne({
+                          .sarahTest({
                             type: 'invoice',
                             eventID: this.props.event.id,
                           })
