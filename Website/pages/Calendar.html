@@ -4,8 +4,69 @@
 <meta charset='utf-8' />
 <link href='lib/main.css' rel='stylesheet' />
 <script src='lib/main.js'></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+<script src="../js/firebase.js"></script>
 <script>
+  // Venue Firebase Data Scan
+  var currentVal = 1;
+  var hasRun = false;
 
+  // var emailDoc;
+  var userDataRef = firebase.database().ref("database/events").orderByKey();
+  userDataRef.once("value").then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();
+
+          var client_val = childSnapshot.val().client; // Works
+          var clientName_val = childSnapshot.val().clientName; // Names are empty in database, so unsure if it works
+          if (clientName_val == "") {
+              clientName_val = "No name assigned";
+          }
+
+          /**console.log("----------------------------------"
+              + "\nClient #" + currentVal
+              + "\nClient Val: " + client_val
+              + "\nClient Name: " + clientName_val
+              + "\n");//----------------------------------<br>";*/
+            
+          currentVal += 1;
+      });
+      console.log("\nTest 1 Current Val: " + currentVal);
+      hasRun = true;
+  });
+
+  console.log("\nTest 2 Current Val: " + currentVal);
+
+  var userDataRef = firebase.database().ref("database/events").orderByKey();
+  userDataRef.once("value").then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();
+
+          var client_val = childSnapshot.val().client; // Works
+          var clientName_val = childSnapshot.val().clientName; // Names are empty in database, so unsure if it works
+          if (clientName_val == "") {
+              clientName_val = "No name assigned";
+          }
+
+          /**console.log("----------------------------------"
+              + "\nClient #" + currentVal
+              + "\nClient Val: " + client_val
+              + "\nClient Name: " + clientName_val
+              + "\n");//----------------------------------<br>";*/
+            
+          currentVal += 1;
+      });
+      console.log("\nTest 3 Current Val: " + currentVal);
+      hasRun = true;
+  });
+
+  console.log("\nTest 4 Current Val: " + currentVal);
+
+  // Calendar
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
@@ -60,6 +121,7 @@
       googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
 
       // US Holidays
+<<<<<<< Updated upstream
 
       events: 'en.usa#holiday@group.v.calendar.google.com' ,
 
@@ -90,6 +152,30 @@
     ],
       
       */
+=======
+      eventSources: [
+        {
+          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com'
+        },
+        {
+          googleCalendarId: 'ncaaf_75_%41uburn+%54igers#sports@group.v.calendar.google.com' // Doesn't work currently
+          //className: 'auburn-football'
+        },
+        {
+          googleCalendarId: 'ncaaf_73_%2541labama%2B%2543rimson%2B%2554ide%23sports%40group.v.calendar.google.com' // Doesn't work currently
+        }
+      ],
+
+      // Test Event
+      events: [
+        {
+          id: 'a',
+          title: 'my_event',
+          start: '2021-03-04'
+        }
+      ],
+      // events: 'en.usa#holiday@group.v.calendar.google.com',
+>>>>>>> Stashed changes
 
       eventClick: function(arg) {
         // opens events in a popup window
