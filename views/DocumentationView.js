@@ -640,11 +640,6 @@ export default class DocumentationView extends React.Component {
                     {
                       text: 'OK',
                       onPress: () => {
-                        // this.props.database.sarahTest({
-                        //   type: 'artist_confirmation',
-                        //   eventID: this.props.event.id,
-                        // })
-
                         this.props.database
                           .generateSendSaveOne({
                             type: 'artist_confirmation',
@@ -677,8 +672,6 @@ export default class DocumentationView extends React.Component {
         >
           {/* <View> */}
           <Text style={DocumentationStyles.entryName}>Artist Invoice</Text>
-          {/* {this.state.display.invoice} */}
-          {/* </View> */}
           <View style={DocumentationStyles.entryButton}>
             <Button
               title='Send'
@@ -695,7 +688,7 @@ export default class DocumentationView extends React.Component {
                       text: 'OK',
                       onPress: () => {
                         this.props.database
-                          .sarahTest({
+                          .generateSendSaveOne({
                             type: 'invoice',
                             eventID: this.props.event.id,
                           })
@@ -708,29 +701,12 @@ export default class DocumentationView extends React.Component {
                                 err
                             );
                           })
-                          .finally(() => {
-                            this.setState({
-                              disableSendingInvoice: false,
-                              // display: {
-                              //     confirmation: this.state.display.confirmation,
-                              //     invoice: this.generateArtistInvoiceDisplay(),
-                              //     bookinglist: this.state.display.bookinglist,
-                              //     calendar: this.state.display.calendar,
-                              //     allConfirmations: this.state.display.allConfirmations,
-                              //     allInvoices: this.state.display.allInvoices
-                              // }
-                            });
-                          });
 
                         alert(
                           'The artist invoice is being generated, saved to the Google Drive, and emailed out.' +
                             ' Please wait until this has complete before requesting again.' +
                             ' This may take up to a minute to complete.'
                         );
-
-                        this.setState({
-                          disableSendingInvoice: true,
-                        });
                       },
                     },
                   ],

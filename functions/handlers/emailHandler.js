@@ -48,7 +48,6 @@ const sendEmail = function (data) {
         });
     });
 };
-//exports.sendEmail = sendEmail;
 
 exports.sendArtistConfirmation = function (event, client, venue, pdf) {
     return new Promise((resolve, reject) => {
@@ -77,12 +76,11 @@ exports.sendArtistConfirmation = function (event, client, venue, pdf) {
 
 exports.sendInvoice = function (event, client, venue, pdf) {
     return new Promise((resolve, reject) => {
-        let emailSubject = "Testing"; //client + " - Invoice - " + Util.toUS(event.date);
-        let emailBody = "TestingBody";
-        // "To whom it may concern,\n\n" +
-        //     "Attached is the invoice for " + client.stage + ", who is performing at " + venue.name + " on " + Util.toUSText(event.date) + ".\n" +
-        //     "Please don't hesitate to reply back to this email if you have any questions." +
-        //     "\n\nThanks,\nMusic Matters Bookings";
+        let emailSubject = client + " - Invoice - " + Util.toUS(event.date);
+        let emailBody = "To whom it may concern,\n\n" +
+            "Attached is the invoice for " + client.stage + ", who is performing at " + venue.name + " on " + Util.toUSText(event.date) + ".\n" +
+            "Please don't hesitate to reply back to this email if you have any questions." +
+            "\n\nThanks,\nMusic Matters Bookings";
         return sendEmail({
             to: client.email,
             subject: emailSubject,

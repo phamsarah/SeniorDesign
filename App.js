@@ -1,10 +1,7 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Button,
-  View,
   YellowBox,
-  Alert,
 } from 'react-native';
 import DayView from './views/DayView';
 import EventView from './views/EventView';
@@ -13,22 +10,17 @@ import { ManageVenues, VenueView } from './views/VenueViews';
 import { VenueView2 } from './views/VenueViews2';
 import { ClientView, ManageClients } from './views/ClientViews';
 import Database from './Database';
-import Styles from './styles';
 import {
   createAppContainer,
   createStackNavigator,
   createSwitchNavigator,
 } from 'react-navigation';
-import { CalendarList } from 'react-native-calendars';
-import { randomColor, toDateString, toDateTime, toMonthString } from './util';
 import _ from 'lodash';
 import LoginView from './views/LoginView';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import Dropdown from './components/Dropdown';
 import AppContainer from './components/AppContainer';
-import MoreButton from './components/MoreButton';
-import { Client, Event, Venue } from './objects';
 import DocumentationView from './views/DocumentationView';
+
 
 // Firebase's implementation utilizes long timers,
 // which React Native doesn't like and throws a warning,

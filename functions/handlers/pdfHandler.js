@@ -179,7 +179,7 @@ exports.generateInvoice = function (event, client, venue) {
   let content = [];
 
   [
-    venue.name + ' ' + venue.address.city + ',' + venue.address.toUpperCase(),
+    venue.name + ' ' + venue.address.city + ',' + venue.address.state,
     'LIVE PERFORMANCE CONTRACT/CONFIRMATION',
     'INVOICE',
     'MUSICMATTERSBOOKINGS.COM',
