@@ -101,7 +101,7 @@ function getMonthEnd(monthStart) {
 }
 
 exports.generateCalendar = function (month, year, events) {
-  //months begin at 0, not 1
+  //months begin at 0, not 1, if month is January then it would be 0, if month is February then month is 1
   month -= 1;
 
   let monthStart = new Date(year, month, 1);
@@ -126,11 +126,9 @@ exports.generateCalendar = function (month, year, events) {
     layout: {
       fillColor: (row, node, column) => {
         if (row === 0) return CAL_BLUE;
-        else if (row === 1 && column < monthStart.getDay()) return CAL_GREY;
-        else if (
-          row === node.table.body.length - 1 &&
-          column > monthEnd.getDay()
-        )
+        else if (row === 1 && column < monthStart.getDay()) 
+          return CAL_GREY;
+        else if ( row === node.table.body.length - 1 && column > monthEnd.getDay())
           return CAL_GREY;
         else if (column === 0 || column === 6) return '#dee2f2';
         else return null;

@@ -6,28 +6,14 @@ import {
   Button,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { RadioGroup } from 'react-native-btr';
-import DateTimePicker from 'react-native-modal-datetime-picker/src/index';
 import Styles from '../styles';
-import {
-  toAMPM,
-  toDateString,
-  toDateTime,
-  toMilitaryTime,
-  toTimeString,
-  toUS,
-} from '../util';
 import Database from '../Database';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import Dropdown from '../components/Dropdown';
-import TimeInput from '../components/TimeInput';
 import AppContainer from '../components/AppContainer';
 import { Dimensions, Platform, PixelRatio } from 'react-native';
-import firebase from 'firebase';
+
 
 @withMappedNavigationProps()
 export default class DocumentationView extends React.Component {
