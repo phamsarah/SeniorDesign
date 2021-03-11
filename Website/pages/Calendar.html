@@ -9,62 +9,25 @@
 <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
 <script src="../js/firebase.js"></script>
 <script>
-  // Venue Firebase Data Scan
-  var currentVal = 1;
-  var hasRun = false;
 
-  // var emailDoc;
-  var userDataRef = firebase.database().ref("database/events").orderByKey();
-  userDataRef.once("value").then(function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-          var key = childSnapshot.key;
-          var childData = childSnapshot.val();
-
-          var client_val = childSnapshot.val().client; // Works
-          var clientName_val = childSnapshot.val().clientName; // Names are empty in database, so unsure if it works
-          if (clientName_val == "") {
-              clientName_val = "No name assigned";
-          }
-
-          /**console.log("----------------------------------"
-              + "\nClient #" + currentVal
-              + "\nClient Val: " + client_val
-              + "\nClient Name: " + clientName_val
-              + "\n");//----------------------------------<br>";*/
-            
-          currentVal += 1;
-      });
-      console.log("\nTest 1 Current Val: " + currentVal);
-      hasRun = true;
-  });
-
-  console.log("\nTest 2 Current Val: " + currentVal);
+  console.log("Test 0");
+  // Entry Counter
+  var amountOfEntries = 0;
 
   var userDataRef = firebase.database().ref("database/events").orderByKey();
   userDataRef.once("value").then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key;
           var childData = childSnapshot.val();
-
-          var client_val = childSnapshot.val().client; // Works
-          var clientName_val = childSnapshot.val().clientName; // Names are empty in database, so unsure if it works
-          if (clientName_val == "") {
-              clientName_val = "No name assigned";
-          }
-
-          /**console.log("----------------------------------"
-              + "\nClient #" + currentVal
-              + "\nClient Val: " + client_val
-              + "\nClient Name: " + clientName_val
-              + "\n");//----------------------------------<br>";*/
             
-          currentVal += 1;
+          amountOfEntries += 1;
       });
-      console.log("\nTest 3 Current Val: " + currentVal);
-      hasRun = true;
+      console.log("Test 1 Entry Count: " + amountOfEntries);
   });
 
-  console.log("\nTest 4 Current Val: " + currentVal);
+  console.log("Test 2 Entry Count: " + amountOfEntries);
+
+  // Events Scan and Creation
 
   // Calendar
   document.addEventListener('DOMContentLoaded', function() {
@@ -120,60 +83,50 @@
       // http://fullcalendar.io/docs/google_calendar/
       googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
 
-      // US Holidays
-      /**
-<<<<<<< Updated upstream
-
-      events: 'en.usa#holiday@group.v.calendar.google.com' ,
-
-      eventSources: [
-      {
-        googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
-        className: 'holiday',
-        color: 'lightblue'
-      },
-      {
-        function for firebase data,
-        className: 'firebase',
-        textColor: 'black'
-        overlap: false
-      }
-      {
-      googleCalendarId: whatever the foodball games are,
-        className: football,
-        
-        can you have if statements in these?
-
-        if (name has 'Tigers')
-          color: 'orange'
-        if (name has 'Alabama')
-          color: 'red'
-      }
-    ],
-======= */
       eventSources: [
         {
-          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com'
+          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
+          className: 'holiday',
+          color: 'lightblue'
         },
         {
-          googleCalendarId: 'ncaaf_75_%41uburn+%54igers#sports@group.v.calendar.google.com' // Doesn't work currently
-          //className: 'auburn-football'
+          googleCalendarId: 'en.christian#holiday@group.v.calendar.google.com',
+          className: 'Christian Holiday',
+          color: 'green'
         },
         {
-          googleCalendarId: 'ncaaf_73_%2541labama%2B%2543rimson%2B%2554ide%23sports%40group.v.calendar.google.com' // Doesn't work currently
+          googleCalendarId: 'ncaaf_75_%41uburn+%54igers#sports@group.v.calendar.google.com', // Doesn't work currently
+          className: 'auburn-football',
+          color: 'blue'
+        },
+        {
+          googleCalendarId: 'ncaaf_75_Auburn+Tigers#sports@group.v.calendar.google.com',
+          className: 'auburn-football-decoded',
+          color: 'blue'
+        },
+        {
+          googleCalendarId: 'ncaaf_73_%41labama+%43rimson+%54ide#sports@group.v.calendar.google.com', // Doesn't work currently
+          className: 'alabama-football',
+          color: 'crimson'
+        },
+        {
+          googleCalendarId: 'ncaaf_73_Alabama+Crimson+Tide#sports@group.v.calendar.google.com',
+          className: 'alabama-football-decoded',
+          color: 'crimson'
         }
       ],
 
-      // Test Event
       events: [
         {
           id: 'a',
           title: 'my_event',
-          start: '2021-03-04'
+          start: '2021-03-04',
+          className: 'Test Time',
+          color: 'yellow'
         }
       ],
-      // events: 'en.usa#holiday@group.v.calendar.google.com',
-// >>>>>>> Stashed changes
+
+      // events: (INSERT EVENT ARRAY HERE)
 
       eventClick: function(arg) {
         // opens events in a popup window
@@ -188,9 +141,12 @@
       }
 
     });
-
+    console.log("Test 3 Entry Count: " + amountOfEntries);
     calendar.render();
   });
+  console.log("Test 4 Entry Count: " + amountOfEntries);
+
+  
 
 </script>
 <style>
