@@ -68,7 +68,7 @@ exports.docSendOut = Functions.pubsub.schedule("every day 08:00")
                             month: nextMonthDate.getMonth(),
                             year: nextMonthDate.getFullYear()
                         }).then(() => {
-                            console.log(`[*] Invoices sent out for venue [${venue.id}], year-month [${nextMonthString}]`);
+                            console.log(`[*] Invssent out for venue [${venue.id}], year-month [${nextMonthString}]`);
                         }).catch(err => {
                             console.log(`[!] ERROR sending out invoices for venue [${venue.id}], year-month [${nextMonthString}]:`);
                             console.log(err);
@@ -464,7 +464,7 @@ const generateSendSaveCalendar = function(events, venue, month, year) {
         const pdf1 = PDF.generateCalendar(month, year, events);
         const pdf2 = PDF.generateCalendar(month, year, events);
         return Promise.all([
-            Email.sendCalendar(month, year, venue, pdf1),
+            //Email.sendCalendar(month, year, venue, pdf1),
             Drive.uploadCalendar(month, year, venue, pdf2)
         ]).then(pdfs => {
             return venueDB.child(venue.id).update({calendarLastSent: new Date().toString()});
