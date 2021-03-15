@@ -464,7 +464,7 @@ const generateSendSaveCalendar = function(events, venue, month, year) {
         const pdf1 = PDF.generateCalendar(month, year, events);
         const pdf2 = PDF.generateCalendar(month, year, events);
         return Promise.all([
-            //Email.sendCalendar(month, year, venue, pdf1),
+            Email.sendCalendar(month, year, venue, pdf1),
             Drive.uploadCalendar(month, year, venue, pdf2)
         ]).then(pdfs => {
             return venueDB.child(venue.id).update({calendarLastSent: new Date().toString()});

@@ -48,29 +48,26 @@ function generateCalendarTable(startDate, events) {
       text: currentDate.getDate(),
     });
 
+
+    // Events is all the events on the entire month, we filter to create a list of events on the currentDate day
+    // since there can be multiple events in one day
     let matchingEvents = events.filter((event) => {
       let eventDate = new Date(Util.toUS(event.date));
-      console.log(`[*] eventDate [${eventDate}], eventDate.getTime [${eventDate.getTime()}]`);
       return eventDate.getTime() === currentDate.getTime();
     });
 
-    console.log(`**Before Matching Events**`);
-    console.log(`MatchingEvents: [${matchingEvents}]`);
-    console.log(`**After Matching Events**`);
-
     matchingEvents.forEach((event, i) => {
-      // if (i < 2) {
+      console.log(`[*] BEFORE - event.start: [${event.start}], event.end [${event.end}]`);
+      
       cellArray.push({
-        text: [Util.event.start, Util.event.end].join(' to '),
+        text: Util.toAMPM(event.start) + ' to ' + Util.toAMPM(event.end),
         style: 'dateTimeslot',
       });
-      console.log(`[*] Util.event.start: [${Util.event.start}], event.end [${Util.event.end}]`);
+
       cellArray.push({
         text: event.client.stage,
         style: 'dateClient',
       });
-      console.log(`[*] event.client.stage [${event.client.stage}]`);
-      // }
     });
 
     //add new date box to most recent week added
