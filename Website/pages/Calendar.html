@@ -10,8 +10,6 @@
 <script src="../js/firebase.js"></script>
 <script>
 
-//This is the calendar portion of the website. Anything that has to do with the calendar
-//is found on this .html file
   console.log("Test 0");
 
   var amountOfEntries = 0;
@@ -154,37 +152,18 @@
 
       eventSources: [
         {
-          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
-          className: 'holiday',
-          color: 'lightblue'
-        },
-        {
           googleCalendarId: 'en.christian#holiday@group.v.calendar.google.com',
           className: 'Christian Holiday',
           color: 'green'
         },
         {
-          googleCalendarId: 'ncaaf_75_%41uburn+%54igers#sports@group.v.calendar.google.com', // Doesn't work currently
+          googleCalendarId: 'uiptf7l51eoa5cm19gffbvlj4s@group.calendar.google.com',
+          className: 'holiday',
+          color: 'blue'
+        },
+        {
+          googleCalendarId: 'c5lcbj68ffn0gh1nt9q0ndg9uo@group.calendar.google.com', // Doesn't work currently
           className: 'auburn-football',
-          color: 'blue'
-        },
-        {
-          googleCalendarId: 'ncaaf_75_Auburn+Tigers#sports@group.v.calendar.google.com',
-          className: 'auburn-football-decoded',
-          color: 'blue'
-        },
-        {
-          googleCalendarId: 'ncaaf_73_%41labama+%43rimson+%54ide#sports@group.v.calendar.google.com', // Doesn't work currently
-          className: 'alabama-football',
-          color: 'crimson'
-        },
-        {
-          title: 'Event1',
-          start: '2021-04-04'
-        },
-        {
-          googleCalendarId: 'ncaaf_73_Alabama+Crimson+Tide#sports@group.v.calendar.google.com',
-          className: 'alabama-football-decoded',
           color: 'crimson'
         }
       ],
