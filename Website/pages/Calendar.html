@@ -60,8 +60,9 @@
       color: 'pink'
     }
   ];
-  var currentEntry = 1;
 
+  function testfuction(){
+  var currentEntry = 1;
   var userDataRef = firebase.database().ref("database/events").orderByKey();
   userDataRef.once("value").then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
@@ -93,7 +94,14 @@
   // Entry Counter
 
   console.log("Test 2 Entry Count: " + amountOfEntries);
+  }
 
+  function testlist(entryList2) {
+    for (i in entrylist2){
+      x += entrylist2[i];
+      return x;
+    }
+  }
   // Events Scan and Creation
 
   // Calendar
@@ -185,19 +193,9 @@
           className: 'auburn-football',
           color: 'crimson'
         },
-        {
-          events: [ // put the array in the `events` property
-        {
-          title: 'Event1',
-          start: '2021-03-04'
-        }
-      ],
-      color: 'black',     // an option!
-      textColor: 'yellow' // an option!
-    }
+        
       ],
 
-      events: entryList2,
 
       eventClick: function(arg) {
         // opens events in a popup window
