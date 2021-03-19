@@ -21,7 +21,7 @@ class MonthView extends React.Component {
 
     constructor(props) {
         super(props);
-
+        console.log(`Constructing Month`);
         let currentDate = new Date();
         this.state = {
             selectedMonth: currentDate.getMonth(),

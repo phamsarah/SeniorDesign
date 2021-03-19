@@ -45,47 +45,6 @@ export class ManageVenues extends React.Component {
     super(props);
   }
 
-  _renderVenue(venue) {
-    return (
-      <View style={VenueStyles.entryContainer}>
-        <TouchableOpacity
-          style={VenueStyles.entryName}
-          onPress={() => {
-            this.props.navigation.navigate('Month', {
-              selectedVenue: venue,
-              database: this.props.database,
-            });
-          }}
-        >
-          <Text>{venue.name}</Text>
-        </TouchableOpacity>
-        <View style={VenueStyles.entryButton}>
-          <Button
-            title='⚙️🔧'
-            onPress={() =>
-              this.props.navigation.navigate('Venue', {
-                venue: venue,
-                database: this.props.database,
-                onSave: (venue) => {
-                  this.props.database
-                    .updateVenue(venue)
-                    .catch((err) => console.log(err));
-                  this.forceUpdate();
-                },
-                onDelete: (venue) => {
-                  this.props.database
-                    .removeVenue(venue)
-                    .catch((err) => console.log(err));
-                  this.forceUpdate();
-                },
-              })
-            }
-          />
-        </View>
-      </View>
-    );
-  }
-
   render() {
     return (
       <AppContainer>
@@ -182,8 +141,20 @@ export class VenueView extends React.Component {
   constructor(props) {
     super(props);
 
+    this._testMethod('TEST METHOD FROM CONSTRUCTOR');
+  }
+
+  _testMethod(printMe){
     let venue = this.props.venue || new Venue();
     this.isNew = !venue.id;
+    console.log(`(*************************************)`);
+    console.log(`TEST METHOD IS BEING RAN`);
+    console.log(`WHO IS CALLING ME: [${printMe}]`);
+    console.log(`TESTING DATABASE FUNCTION [${this.props.database}]`);
+    console.log(`Test this.props.venue: [${this.props.venue}]`);
+    console.log(`Test venue.name: [${venue.name}]`);
+    console.log(`this.isNew: [${this.isNew}]`);
+    console.log(`venue.id: [${venue.id}]`);
     this.state = {
       id: venue.id || '',
       name: venue.name || '',
@@ -202,6 +173,7 @@ export class VenueView extends React.Component {
       monthlyCalendarSendOut: venue.monthlyCalendarSendOut.toString() || '',
       emaillist: venue.emaillist || [],
     };
+    console.log(`TESTING this.state.email: [${this.state.email}]`);
   }
 
   _renderEmailList(emaillistData) {
@@ -322,6 +294,7 @@ export class VenueView extends React.Component {
   }
 
   render() {
+    this._testMethod('TEST METHOD FROM RENDER');
     return (
       <AppContainer style={Styles.infoView}>
         <View style={Styles.contentContainer}>
@@ -531,6 +504,9 @@ export class VenueView extends React.Component {
           <Button
             title={this.isNew ? 'Create Venue' : 'Save Venue'}
             onPress={() => {
+              console.log(`this.isNew2: [${this.isNew}]`);
+              console.log(`This is running second`);
+
               if (this._validateData()) {
                 let venue;
                 if (this.isNew) {
@@ -855,16 +831,6 @@ export function normalize(size) {
 
 const VenueStyles = StyleSheet.create({
   entryContainer: {
-    //width: "100%",
-    //backgroundColor: "#eee",
-    //display: "flex",
-    //flexDirection: "row",
-    //padding: 10,
-    //borderBottomWidth: 1,
-    //borderColor: "#ccc",
-    //alignItems: "center",
-    //justifyContent: "space-between"
-    //fontSize: normalize(24),
     backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'row',
