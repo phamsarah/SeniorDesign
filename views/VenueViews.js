@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Alert,
-  AlertIOS,
   Button,
   FlatList,
   StyleSheet,
@@ -12,28 +11,19 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { Venue, Client } from '../objects';
+import { Venue } from '../objects';
 import Database from '../Database';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 import AppContainer from '../components/AppContainer';
 import Styles from '../styles';
 import _ from 'lodash';
 import { ScrollView } from 'react-native-gesture-handler';
-import { KeyboardAvoidingView, Picker } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
 import styles from '../styles';
-import { toAMPM, objectToArray, toMonthString } from '../util';
+import { toAMPM } from '../util';
 import TimeInput from '../components/TimeInput';
 import { ClientStyles } from './ClientViews';
-import Firebase from 'firebase';
 import { Dimensions, Platform, PixelRatio } from 'react-native';
-import * as Font from 'expo-font';
-import {
-  useFonts,
-  BalsamiqSans_400Regular,
-  BalsamiqSans_400Regular_Italic,
-  BalsamiqSans_700Bold,
-  BalsamiqSans_700Bold_Italic,
-} from '@expo-google-fonts/balsamiq-sans';
 
 @withMappedNavigationProps()
 export class ManageVenues extends React.Component {
@@ -141,20 +131,17 @@ export class VenueView extends React.Component {
   constructor(props) {
     super(props);
 
-    this._testMethod('TEST METHOD FROM CONSTRUCTOR');
+    this._initializeVenue('TEST METHOD FROM CONSTRUCTOR', props);
   }
 
-  _testMethod(printMe){
+  _initializeVenue(printMe, props){
     let venue = this.props.venue || new Venue();
     this.isNew = !venue.id;
     console.log(`(*************************************)`);
-    console.log(`TEST METHOD IS BEING RAN`);
+    console.log(`INITIALIZE VENUE`);
     console.log(`WHO IS CALLING ME: [${printMe}]`);
-    console.log(`TESTING DATABASE FUNCTION [${this.props.database}]`);
-    console.log(`Test this.props.venue: [${this.props.venue}]`);
     console.log(`Test venue.name: [${venue.name}]`);
     console.log(`this.isNew: [${this.isNew}]`);
-    console.log(`venue.id: [${venue.id}]`);
     this.state = {
       id: venue.id || '',
       name: venue.name || '',
@@ -174,6 +161,17 @@ export class VenueView extends React.Component {
       emaillist: venue.emaillist || [],
     };
     console.log(`TESTING this.state.email: [${this.state.email}]`);
+  }
+
+  componentDidMount() {
+    console.log('called did mount');
+    //this._initializeVenue("ComponentDidMount");
+  }
+
+  componentDidUpdate(previousProps, previousState, snapShot){
+    console.log(`ComponentDidUpdate previousState: [${previousState}]`);
+
+    this._initializeVenue("COMPONENT DID UPDATE");
   }
 
   _renderEmailList(emaillistData) {
@@ -294,7 +292,7 @@ export class VenueView extends React.Component {
   }
 
   render() {
-    this._testMethod('TEST METHOD FROM RENDER');
+    //this._initializeVenue('TEST METHOD FROM RENDER');
     return (
       <AppContainer style={Styles.infoView}>
         <View style={Styles.contentContainer}>
@@ -508,6 +506,7 @@ export class VenueView extends React.Component {
               console.log(`This is running second`);
 
               if (this._validateData()) {
+                console.log('inside valid data');
                 let venue;
                 if (this.isNew) {
                   venue = new Venue(this.state);
@@ -515,8 +514,10 @@ export class VenueView extends React.Component {
                   venue = this.props.venue;
                   venue.update(this.state);
                 }
+                console.log('made it past update');
                 this.props.navigation.goBack();
                 this.props.onSave(venue);
+                console.log('Tried going back');
               }
             }}
           />
