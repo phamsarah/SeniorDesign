@@ -52,8 +52,8 @@ export class VenueView2 extends React.Component {
           <Text>{venue.name}</Text>
         </TouchableOpacity>
         <View style={VenueStyles.entryButton}>
-          {/* <Button
-            title='⚙️🔧 THIS'
+           <Button
+            title='⚙️🔧'
             onPress={() =>
               this.props.navigation.navigate('Venue', {
                 venue: venue,
@@ -63,6 +63,7 @@ export class VenueView2 extends React.Component {
                     .updateVenue(venue)
                     .catch((err) => console.log(err));
                   this.forceUpdate();
+                  console.log(`onSave is being used`);
                 },
                 onDelete: (venue) => {
                   this.props.database
@@ -72,36 +73,7 @@ export class VenueView2 extends React.Component {
                 }
               })
             }
-          /> */}
-
-        <TouchableOpacity
-          style={VenueStyles.entryName}
-          onPress={() => {
-            console.log(`*** Edit Button `);
-            console.log(`*** selectedVenue this.props.database: [${this.props.database}]`);
-            console.log(`*** selectedVenue, venue.name: [${venue.name}]`);
-
-            this.props.navigation.navigate('Venue', {
-              venue: venue,
-              database: this.props.database,
-              onSave: (venue) => {
-                this.props.database
-                  .updateVenue(venue)
-                  .catch((err) => console.log(err));
-                this.forceUpdate();
-              },
-              onDelete: (venue) => {
-                this.props.database
-                  .removeVenue(venue)
-                  .catch((err) => console.log(err));
-                this.forceUpdate();
-              }
-            });
-
-          }}
-        >
-          <Text>⚙️🔧</Text>
-        </TouchableOpacity>
+          /> 
         </View>
       </View>
     );

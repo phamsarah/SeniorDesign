@@ -161,7 +161,7 @@ export class VenueView extends React.Component {
       emaillist: venue.emaillist || [],
     };
 
-    this.props.navigation.addListener('didFocus', () => {
+    this.focusListener = this.props.navigation.addListener('didFocus', () => {
       this.setState({
         id: venue.id || '',
         name: venue.name || '',
@@ -190,6 +190,13 @@ export class VenueView extends React.Component {
   componentDidUpdate(){
     this._initializeVenue("COMPONENT DID UPDATE");
   }
+
+  componentWillUnmount() {
+    // fix Warning: Can't perform a React state update on an unmounted component
+    this.setState = (state,callback)=>{
+        return;
+    };
+}
 
   _renderEmailList(emaillistData) {
     let name = emaillistData.name;
@@ -309,7 +316,6 @@ export class VenueView extends React.Component {
   }
 
   render() {
-    //this._initializeVenue('TEST METHOD FROM RENDER');
     return (
       <AppContainer style={Styles.infoView}>
         <View style={Styles.contentContainer}>

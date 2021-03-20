@@ -47,7 +47,7 @@ class MonthView extends React.Component {
         this.props.database.clients.forEach(client => {
             colors[client.id] = {
                 key: client.id,
-                color: randomColor(client.id).hex
+                color: '#FF0000'
             };
         });
 
