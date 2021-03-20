@@ -101,7 +101,6 @@ export default class Database {
 
         this.generateSendSaveOne = this.func.httpsCallable("generateSendSaveOne");
         this.generateSendSaveAll = this.func.httpsCallable("generateSendSaveAll");
-        this.sarahTest = this.func.httpsCallable("sarahTest");
     }
 
     // load information on all clients
