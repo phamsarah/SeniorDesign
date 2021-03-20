@@ -160,17 +160,34 @@ export class VenueView extends React.Component {
       monthlyCalendarSendOut: venue.monthlyCalendarSendOut.toString() || '',
       emaillist: venue.emaillist || [],
     };
+
+    this.props.navigation.addListener('didFocus', () => {
+      this.setState({
+        id: venue.id || '',
+        name: venue.name || '',
+        email: venue.contactEmail || '',
+        street1: venue.address.street1 || '',
+        street2: venue.address.street2 || '',
+        city: venue.address.city || '',
+        state: venue.address.state || '',
+        zip: venue.address.zip || '',
+        presetTimeSlots: venue.presetTimeSlots || [],
+        artistConfirmationSendOut:
+          venue.artistConfirmationSendOut.toString() || '',
+        artistInvoiceSendOut: venue.artistInvoiceSendOut.toString() || '',
+        monthlyBookingListSendOut:
+          venue.monthlyBookingListSendOut.toString() || '',
+        monthlyCalendarSendOut: venue.monthlyCalendarSendOut.toString() || '',
+        emaillist: venue.emaillist || [],
+      });
+      this.forceUpdate();
+  });
+
     console.log(`TESTING this.state.email: [${this.state.email}]`);
   }
 
-  componentDidMount() {
-    console.log('called did mount');
-    //this._initializeVenue("ComponentDidMount");
-  }
 
-  componentDidUpdate(previousProps, previousState, snapShot){
-    console.log(`ComponentDidUpdate previousState: [${previousState}]`);
-
+  componentDidUpdate(){
     this._initializeVenue("COMPONENT DID UPDATE");
   }
 
