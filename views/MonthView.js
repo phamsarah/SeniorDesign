@@ -1,11 +1,9 @@
 import React from 'react';
-import {randomColor, toDateString, toDateTime, toMonthString, blackColor} from "../util";
+import { toDateString, toDateTime } from "../util";
 import Styles from "../styles";
 import {CalendarList} from "react-native-calendars";
 import _ from "lodash";
-import Dropdown from "../components/Dropdown";
 import AppContainer from "../components/AppContainer";
-import MoreButton from "../components/MoreButton";
 import {Venue} from "../objects";
 import Database from "../Database";
 import PropTypes from 'prop-types';
