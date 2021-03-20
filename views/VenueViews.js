@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Alert,
-  AlertIOS,
   Button,
   FlatList,
   StyleSheet,
@@ -12,28 +11,19 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { Venue, Client } from '../objects';
+import { Venue } from '../objects';
 import Database from '../Database';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 import AppContainer from '../components/AppContainer';
 import Styles from '../styles';
 import _ from 'lodash';
 import { ScrollView } from 'react-native-gesture-handler';
-import { KeyboardAvoidingView, Picker } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
 import styles from '../styles';
-import { toAMPM, objectToArray, toMonthString } from '../util';
+import { toAMPM } from '../util';
 import TimeInput from '../components/TimeInput';
 import { ClientStyles } from './ClientViews';
-import Firebase from 'firebase';
 import { Dimensions, Platform, PixelRatio } from 'react-native';
-import * as Font from 'expo-font';
-import {
-  useFonts,
-  BalsamiqSans_400Regular,
-  BalsamiqSans_400Regular_Italic,
-  BalsamiqSans_700Bold,
-  BalsamiqSans_700Bold_Italic,
-} from '@expo-google-fonts/balsamiq-sans';
 
 @withMappedNavigationProps()
 export class ManageVenues extends React.Component {
@@ -43,47 +33,6 @@ export class ManageVenues extends React.Component {
 
   constructor(props) {
     super(props);
-  }
-
-  _renderVenue(venue) {
-    return (
-      <View style={VenueStyles.entryContainer}>
-        <TouchableOpacity
-          style={VenueStyles.entryName}
-          onPress={() => {
-            this.props.navigation.navigate('Month', {
-              selectedVenue: venue,
-              database: this.props.database,
-            });
-          }}
-        >
-          <Text>{venue.name}</Text>
-        </TouchableOpacity>
-        <View style={VenueStyles.entryButton}>
-          <Button
-            title='⚙️🔧'
-            onPress={() =>
-              this.props.navigation.navigate('Venue', {
-                venue: venue,
-                database: this.props.database,
-                onSave: (venue) => {
-                  this.props.database
-                    .updateVenue(venue)
-                    .catch((err) => console.log(err));
-                  this.forceUpdate();
-                },
-                onDelete: (venue) => {
-                  this.props.database
-                    .removeVenue(venue)
-                    .catch((err) => console.log(err));
-                  this.forceUpdate();
-                },
-              })
-            }
-          />
-        </View>
-      </View>
-    );
   }
 
   render() {
@@ -182,8 +131,17 @@ export class VenueView extends React.Component {
   constructor(props) {
     super(props);
 
+    this._initializeVenue('TEST METHOD FROM CONSTRUCTOR', props);
+  }
+
+  _initializeVenue(printMe, props){
     let venue = this.props.venue || new Venue();
     this.isNew = !venue.id;
+    console.log(`(*************************************)`);
+    console.log(`INITIALIZE VENUE`);
+    console.log(`WHO IS CALLING ME: [${printMe}]`);
+    console.log(`Test venue.name: [${venue.name}]`);
+    console.log(`this.isNew: [${this.isNew}]`);
     this.state = {
       id: venue.id || '',
       name: venue.name || '',
@@ -202,7 +160,43 @@ export class VenueView extends React.Component {
       monthlyCalendarSendOut: venue.monthlyCalendarSendOut.toString() || '',
       emaillist: venue.emaillist || [],
     };
+
+    this.focusListener = this.props.navigation.addListener('didFocus', () => {
+      this.setState({
+        id: venue.id || '',
+        name: venue.name || '',
+        email: venue.contactEmail || '',
+        street1: venue.address.street1 || '',
+        street2: venue.address.street2 || '',
+        city: venue.address.city || '',
+        state: venue.address.state || '',
+        zip: venue.address.zip || '',
+        presetTimeSlots: venue.presetTimeSlots || [],
+        artistConfirmationSendOut:
+          venue.artistConfirmationSendOut.toString() || '',
+        artistInvoiceSendOut: venue.artistInvoiceSendOut.toString() || '',
+        monthlyBookingListSendOut:
+          venue.monthlyBookingListSendOut.toString() || '',
+        monthlyCalendarSendOut: venue.monthlyCalendarSendOut.toString() || '',
+        emaillist: venue.emaillist || [],
+      });
+      this.forceUpdate();
+  });
+
+    console.log(`TESTING this.state.email: [${this.state.email}]`);
   }
+
+
+  componentDidUpdate(){
+    this._initializeVenue("COMPONENT DID UPDATE");
+  }
+
+  componentWillUnmount() {
+    // fix Warning: Can't perform a React state update on an unmounted component
+    this.setState = (state,callback)=>{
+        return;
+    };
+}
 
   _renderEmailList(emaillistData) {
     let name = emaillistData.name;
@@ -531,7 +525,11 @@ export class VenueView extends React.Component {
           <Button
             title={this.isNew ? 'Create Venue' : 'Save Venue'}
             onPress={() => {
+              console.log(`this.isNew2: [${this.isNew}]`);
+              console.log(`This is running second`);
+
               if (this._validateData()) {
+                console.log('inside valid data');
                 let venue;
                 if (this.isNew) {
                   venue = new Venue(this.state);
@@ -539,8 +537,10 @@ export class VenueView extends React.Component {
                   venue = this.props.venue;
                   venue.update(this.state);
                 }
+                console.log('made it past update');
                 this.props.navigation.goBack();
                 this.props.onSave(venue);
+                console.log('Tried going back');
               }
             }}
           />
@@ -855,16 +855,6 @@ export function normalize(size) {
 
 const VenueStyles = StyleSheet.create({
   entryContainer: {
-    //width: "100%",
-    //backgroundColor: "#eee",
-    //display: "flex",
-    //flexDirection: "row",
-    //padding: 10,
-    //borderBottomWidth: 1,
-    //borderColor: "#ccc",
-    //alignItems: "center",
-    //justifyContent: "space-between"
-    //fontSize: normalize(24),
     backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'row',

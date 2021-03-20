@@ -48,22 +48,26 @@ function generateCalendarTable(startDate, events) {
       text: currentDate.getDate(),
     });
 
+
+    // Events is all the events on the entire month, we filter to create a list of events on the currentDate day
+    // since there can be multiple events in one day
     let matchingEvents = events.filter((event) => {
       let eventDate = new Date(Util.toUS(event.date));
       return eventDate.getTime() === currentDate.getTime();
     });
 
     matchingEvents.forEach((event, i) => {
-      // if (i < 2) {
+      console.log(`[*] BEFORE - event.start: [${event.start}], event.end [${event.end}]`);
+      
       cellArray.push({
-        text: [Util.event.start, Util.event.end].join(' to '),
+        text: Util.toAMPM(event.start) + ' to ' + Util.toAMPM(event.end),
         style: 'dateTimeslot',
       });
+
       cellArray.push({
         text: event.client.stage,
         style: 'dateClient',
       });
-      // }
     });
 
     //add new date box to most recent week added
@@ -101,7 +105,7 @@ function getMonthEnd(monthStart) {
 }
 
 exports.generateCalendar = function (month, year, events) {
-  //months begin at 0, not 1
+  //months begin at 0, not 1, if month is January then it would be 0, if month is February then month is 1
   month -= 1;
 
   let monthStart = new Date(year, month, 1);
@@ -126,11 +130,9 @@ exports.generateCalendar = function (month, year, events) {
     layout: {
       fillColor: (row, node, column) => {
         if (row === 0) return CAL_BLUE;
-        else if (row === 1 && column < monthStart.getDay()) return CAL_GREY;
-        else if (
-          row === node.table.body.length - 1 &&
-          column > monthEnd.getDay()
-        )
+        else if (row === 1 && column < monthStart.getDay()) 
+          return CAL_GREY;
+        else if ( row === node.table.body.length - 1 && column > monthEnd.getDay())
           return CAL_GREY;
         else if (column === 0 || column === 6) return '#dee2f2';
         else return null;
@@ -179,7 +181,7 @@ exports.generateInvoice = function (event, client, venue) {
   let content = [];
 
   [
-    venue.name + ' ' + venue.address.city + ',' + venue.address.toUpperCase(),
+    venue.name + ' ' + venue.address.city + ',' + venue.address.state,
     'LIVE PERFORMANCE CONTRACT/CONFIRMATION',
     'INVOICE',
     'MUSICMATTERSBOOKINGS.COM',

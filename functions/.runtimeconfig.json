@@ -1,14 +1,14 @@
 {
   "drive": {
-    "refresh_token": "1/GVE4LXFCAJtW9x6kQ1nmZQ8nKrQv9Re2_W7qym9Us2E",
     "web": {
+      "client_id": "939526187420-7a8ta7e1edm7hl7hms08ss3vm1j5esjg.apps.googleusercontent.com",
       "client_secret": "eT4ndzG0mcgy4aDp8Drx7zcv",
-      "redirect_uris": "[https://music-matters-229420.firebaseapp.com/__/auth/handler]",
-      "client_id": "939526187420-7a8ta7e1edm7hl7hms08ss3vm1j5esjg.apps.googleusercontent.com"
-    }
+      "redirect_uris": "[https://music-matters-229420.firebaseapp.com/__/auth/handler]"
+    },
+    "refresh_token": "1/GVE4LXFCAJtW9x6kQ1nmZQ8nKrQv9Re2_W7qym9Us2E"
   },
   "gmail": {
-    "password": "qzvwgnlwqhimhumw",
-    "email": "musicmattersbookings@gmail.com"
+    "email": "musicmattersbookings@gmail.com",
+    "password": "qzvwgnlwqhimhumw"
   }
 }

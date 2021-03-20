@@ -1,11 +1,9 @@
 import React from 'react';
-import {randomColor, toDateString, toDateTime, toMonthString, blackColor} from "../util";
+import { toDateString, toDateTime } from "../util";
 import Styles from "../styles";
 import {CalendarList} from "react-native-calendars";
 import _ from "lodash";
-import Dropdown from "../components/Dropdown";
 import AppContainer from "../components/AppContainer";
-import MoreButton from "../components/MoreButton";
 import {Venue} from "../objects";
 import Database from "../Database";
 import PropTypes from 'prop-types';
@@ -21,7 +19,7 @@ class MonthView extends React.Component {
 
     constructor(props) {
         super(props);
-
+        console.log(`Constructing Month`);
         let currentDate = new Date();
         this.state = {
             selectedMonth: currentDate.getMonth(),
@@ -47,7 +45,7 @@ class MonthView extends React.Component {
         this.props.database.clients.forEach(client => {
             colors[client.id] = {
                 key: client.id,
-                color: randomColor(client.id).hex
+                color: '#FF0000'
             };
         });
 

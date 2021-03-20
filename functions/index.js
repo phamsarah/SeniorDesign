@@ -1,4 +1,5 @@
 const Functions = require('firebase-functions');
+const NodeMailer = require("nodemailer");
 const Admin = require('firebase-admin');
 const Email = require("./handlers/emailHandler.js");
 const PDF = require("./handlers/pdfHandler.js");
@@ -7,7 +8,10 @@ const Util = require("./util.js");
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-Admin.initializeApp();
+Admin.initializeApp({
+    databaseURL: "https://music-matters-229420.firebaseio.com",
+    projectId: "music-matters-229420",});
+
 const db = Admin.database();
 const eventDB = db.ref("database/events");
 const clientDB = db.ref("database/clients");
@@ -15,6 +19,11 @@ const venueDB = db.ref("database/venues");
 const footballGamesDB = db.ref("database/footballGames");
 
 const VALID_TYPES = ["artist_confirmation", "invoice", "booking_list", "calendar"];
+
+
+// TEST FIREBASE FUNCTION
+exports.sarahTest = Functions.https.onCall((data) => {
+});
 
 /*
  * Firebase function that checks each venue's prefences are 0800 CST every day to see if 
@@ -59,7 +68,7 @@ exports.docSendOut = Functions.pubsub.schedule("every day 08:00")
                             month: nextMonthDate.getMonth(),
                             year: nextMonthDate.getFullYear()
                         }).then(() => {
-                            console.log(`[*] Invoices sent out for venue [${venue.id}], year-month [${nextMonthString}]`);
+                            console.log(`[*] Invssent out for venue [${venue.id}], year-month [${nextMonthString}]`);
                         }).catch(err => {
                             console.log(`[!] ERROR sending out invoices for venue [${venue.id}], year-month [${nextMonthString}]:`);
                             console.log(err);
@@ -107,7 +116,7 @@ exports.docSendOut = Functions.pubsub.schedule("every day 08:00")
                 resolve(completedJobs);
             }).catch(err => {
                 reject(err);
-            });
+            });a
         });
     });
 
@@ -125,10 +134,7 @@ exports.generateSendSaveOne = Functions.https.onCall((data) => {
     });
 });
 
-// TEST FIREBASE FUNCTION
-exports.testFunction = Functions.https.onCall((data) => {
-    console.log("THIS WORKS");
-});
+
 
 /*
  * Firebase functions that calls the local genSendSaveAll function

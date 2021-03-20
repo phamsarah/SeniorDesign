@@ -6,27 +6,14 @@ import {
   Button,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { RadioGroup } from 'react-native-btr';
-import DateTimePicker from 'react-native-modal-datetime-picker/src/index';
 import Styles from '../styles';
-import {
-  toAMPM,
-  toDateString,
-  toDateTime,
-  toMilitaryTime,
-  toTimeString,
-  toUS,
-} from '../util';
 import Database from '../Database';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import Dropdown from '../components/Dropdown';
-import TimeInput from '../components/TimeInput';
 import AppContainer from '../components/AppContainer';
 import { Dimensions, Platform, PixelRatio } from 'react-native';
+
 
 @withMappedNavigationProps()
 export default class DocumentationView extends React.Component {
@@ -653,29 +640,6 @@ export default class DocumentationView extends React.Component {
                                 err
                             );
                           })
-                          .finally(() => {
-                            this.setState({
-                              disableSendingConfirmation: false,
-                              // display: {
-                              //     confirmation: this.generateArtistConfirmationDisplay(),
-                              //     invoice: this.state.display.invoice,
-                              //     bookinglist: this.state.bookinglist,
-                              //     calendar: this.state.display.calendar,
-                              //     allConfirmations: this.state.display.allConfirmations,
-                              //     allInvoices: this.state.display.allInvoices
-                              // }
-                            });
-                          });
-
-                        alert(
-                          'The artist confirmation is being generated, saved to the Google Drive, and emailed out.' +
-                            ' Please wait until this has complete before requesting again.' +
-                            ' This may take up to a minute to complete.'
-                        );
-
-                        this.setState({
-                          disableSendingConfirmation: true,
-                        });
                       },
                     },
                   ],
@@ -694,8 +658,6 @@ export default class DocumentationView extends React.Component {
         >
           {/* <View> */}
           <Text style={DocumentationStyles.entryName}>Artist Invoice</Text>
-          {/* {this.state.display.invoice} */}
-          {/* </View> */}
           <View style={DocumentationStyles.entryButton}>
             <Button
               title='Send'
@@ -725,29 +687,12 @@ export default class DocumentationView extends React.Component {
                                 err
                             );
                           })
-                          .finally(() => {
-                            this.setState({
-                              disableSendingInvoice: false,
-                              // display: {
-                              //     confirmation: this.state.display.confirmation,
-                              //     invoice: this.generateArtistInvoiceDisplay(),
-                              //     bookinglist: this.state.display.bookinglist,
-                              //     calendar: this.state.display.calendar,
-                              //     allConfirmations: this.state.display.allConfirmations,
-                              //     allInvoices: this.state.display.allInvoices
-                              // }
-                            });
-                          });
 
                         alert(
                           'The artist invoice is being generated, saved to the Google Drive, and emailed out.' +
                             ' Please wait until this has complete before requesting again.' +
                             ' This may take up to a minute to complete.'
                         );
-
-                        this.setState({
-                          disableSendingInvoice: true,
-                        });
                       },
                     },
                   ],
@@ -1045,75 +990,6 @@ export default class DocumentationView extends React.Component {
             />
           </View>
         </View>
-        <View style={DocumentationStyles.entryContainer}>
-          <Text style={DocumentationStyles.entryName}>Export to Excel</Text>
-          {/* {this.state.display.calendar} */}
-          <View style={DocumentationStyles.entryButton}>
-            <Button
-              title='See'
-              disabled={this.state.disableSendingCalendar}
-              onPress={() => {
-                Alert.alert(
-                  'Confirmation',
-                  'Are you sure you want to send the calendar to excel file for the selected month?',
-                  [
-                    {
-                      text: 'Cancel',
-                    },
-                    {
-                      text: 'OK',
-                      onPress: () => {
-                        this.props.database
-                          .generateSendSaveOne({
-                            type: 'calendar',
-                            venueID: this.props.venue.id,
-                            month: this.props.date.getMonth() + 1,
-                            year: this.props.date.getFullYear(),
-                          })
-                          .then(() => {
-                            alert(
-                              'Calendar successfully generate to Excel file!'
-                            );
-                          })
-                          .catch((err) => {
-                            alert(
-                              'An error occurred while sending the calendar.\n' +
-                                err
-                            );
-                          })
-                          .finally(() => {
-                            this.setState({
-                              disableSendingCalendar: false,
-                              // display: {
-                              //     confirmation: this.state.display.confirmation,
-                              //     invoice: this.state.display.invoice,
-                              //     bookinglist: this.state.display.bookinglist,
-                              //     calendar: this.generateCalendarDisplay(),
-                              //     allConfirmations: this.state.display.allConfirmations,
-                              //     allInvoices: this.state.display.allInvoices
-                              // }
-                            });
-                          });
-
-                        alert(
-                          'The calendar is being generated, saved to the Google Drive, and emailed out.' +
-                            ' Please wait until this has complete before requesting again.' +
-                            ' This may take up to a minute to complete.'
-                        );
-
-                        this.setState({
-                          disableSendingCalendar: true,
-                        });
-                      },
-                    },
-                  ],
-                  { cancelable: true }
-                );
-              }}
-            />
-          </View>
-        </View>
-        <View style={DocumentationStyles.emptyContainer}></View>
       </AppContainer>
     );
   }
