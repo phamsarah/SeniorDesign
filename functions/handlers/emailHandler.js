@@ -18,13 +18,6 @@ let mailOptions = {
     text: 'PLEASE WORK',
 }
 
-exports.sendEmailTest = function (event, client, venue){
-    mailOptions.to = client.email;
-    mailOptions.subject = venue.name + " - Artist Confirmation"
-
-    return gmail.sendMail(mailOptions);
-};
-
 gmail.sendMail(mailOptions, (error, info) => {
     if (error) {
         return console.log(error);
