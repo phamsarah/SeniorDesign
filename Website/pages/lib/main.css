@@ -445,8 +445,8 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
     bottom: 0;
   }
 .fc .fc-non-business {
-    background: rgba(215, 215, 215, 0.3);
-    background: var(--fc-non-business-color, rgba(215, 215, 215, 0.3));
+    background: rgba(17, 88, 100, 0.3);
+    background: var(--fc-non-business-color, rgba(17, 88, 100, 0.3));
   }
 .fc .fc-bg-event {
     background: rgb(143, 223, 130);
@@ -461,12 +461,12 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
       font-style: italic;
     }
 .fc .fc-highlight {
-    background: rgba(188, 232, 241, 0.3);
-    background: var(--fc-highlight-color, rgba(188, 232, 241, 0.3));
+    background: rgba(196, 207, 209, 0.952);
+    background: var(--fc-highlight-color, rgba(196, 207, 209, 0.95));
   }
 .fc .fc-cell-shaded,
   .fc .fc-day-disabled {
-    background: rgba(208, 208, 208, 0.3);
+    background: rgba(255, 255, 255, 0.3);
     background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
   }
 /* link resets */
@@ -576,15 +576,15 @@ A HORIZONTAL event
 */
 .fc-h-event { /* allowed to be top-level */
   display: block;
-  border: 1px solid #3788d8;
+  border: 1px solid #0d71d4;
   border: 1px solid var(--fc-event-border-color, #3788d8);
   background-color: #3788d8;
   background-color: var(--fc-event-bg-color, #3788d8)
 
 }
 .fc-h-event .fc-event-main {
-    color: #fff;
-    color: var(--fc-event-text-color, #fff);
+    color: rgb(0, 0, 0);
+    color: var(--fc-event-text-color, rgb(0, 0, 0));
   }
 .fc-h-event .fc-event-main-frame {
     display: flex; /* for make fc-event-title-container expand */
@@ -711,8 +711,11 @@ A HORIZONTAL event
     position: relative;
     z-index: 1; /* container inner z-index's because <tr>s can't do it */
   }
+
+  /* This is how they got color on a specific block*/
+  
 .fc .fc-daygrid-day.fc-day-today {
-      background-color: rgba(255, 220, 40, 0.15);
+      background-color: rgba(90, 22, 22, 0.15);
       background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));
     }
 .fc .fc-daygrid-day-frame {
@@ -834,7 +837,7 @@ A HORIZONTAL event
     min-width: 1.5em;
     text-align: center;
     background-color: rgba(208, 208, 208, 0.3);
-    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
+    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.801));
     color: #808080;
     color: var(--fc-neutral-text-color, #808080);
   }
@@ -1132,7 +1135,7 @@ A VERTICAL event
   left: 0;
   }
 .fc .fc-timegrid-col.fc-day-today {
-      background-color: rgba(255, 220, 40, 0.15);
+      background-color: rgba(231, 194, 9, 0.15);
       background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));
     }
 .fc .fc-timegrid-col-frame {
