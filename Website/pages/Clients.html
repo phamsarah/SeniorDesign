@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿<!--
+This file is used for the "Clients" section of the website. All functionality within the clients tab that doesn't use firebase
+will be found here.
+-->
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +23,11 @@
         p {
             font-size: 200%;
             color: rgb(255, 255, 255);
+        }
+
+        p2 {
+            font-size: 120%;
+            color:rgb(60, 156, 255);
         }
 
         .sidebar {
@@ -53,6 +63,7 @@
             margin-left: 200px;
             padding: 1px 16px;
             height: 1000px;
+            color:rgb(60, 156, 255);
         }
 
         @media screen and (max-width: 1000px) {
@@ -81,16 +92,19 @@
 </head>
 <body>
 
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <script src="../js/firebase.js"></script>
+
     <div class="sidebar">
         <a href="Homepage.html">Venue</a>
 		<a href="Bookings.html">Bookings</a>
 		<a class="active" a href="#clients"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="140" height="140"><br><br>Clients</a>
         <a href="Documents.html">Documents</a>
 
-        <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		<script src="../js/firebase.js"></script>
+        
 
         <center>
         <input id="signOut" style=font-size:110% type="button" value="Sign Out" onclick="signOut();" />
@@ -101,8 +115,50 @@
     <div class="content">
         <center>
             <h2>MusicMatters Clients</h2>
-            <p>Clients will go here</p>
+            <!--<p>Clients will go here</p>-->
         </center>
+            <p2 id="contentDisplay"></p2>
+
+            <script>
+                var currentVal = 1;
+                var contentHTML = "";
+
+                var userDataRef = firebase.database().ref("database/clients").orderByKey();
+                userDataRef.once("value").then(function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var key = childSnapshot.key;
+                        var childData = childSnapshot.val();
+
+                        var email_val = childSnapshot.val().email;
+                        var splitCheck_val = childSnapshot.val().splitCheck;
+                        if (splitCheck_val == false) {
+                            splitCheck_val = "No Split Check";
+                        }
+                        else {
+                            splitCheck_val = "Split Check";
+                        }
+                        var stage_val = childSnapshot.val().stage;
+                        var performers_val = childSnapshot.val().performers;
+                        var bio_val = childSnapshot.val().bio;
+                        if ((bio_val == undefined) || (bio_val == "") || (bio_val == "\n"))
+                        {
+                            bio_val = 'No Biography Added';
+                        }
+
+                        contentHTML += "----------------------------------"
+                            + "<br>Performer Name: " + performers_val
+                            + "<br>Stage Name #" + currentVal + ": " + stage_val
+                            + "<br>Bio: " + bio_val
+                            + "<br>Email : " + email_val 
+                            + "<br>" + splitCheck_val
+                            + "<br>";//----------------------------------<br>";
+
+                        document.getElementById("contentDisplay").innerHTML = contentHTML;
+                        currentVal = currentVal + 1;
+                    });
+                });
+
+            </script>
     </div>
 
 </body>

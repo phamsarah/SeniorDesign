@@ -1,5 +1,14 @@
+/* 
+This file is for the firebase functions used for the website
+
+Developers: Austin Mongold, Austin Newkirk (austinjaynew@gmail.com)
+*/
+
+
 
 var firebaseConfig = {
+
+	//Honesly, idk what the exactly does. Probably fetches/authinticates the firebase data.
     apiKey: "AIzaSyABrXbvSkA_LqT0zKSTJ3_JHqNcxgyuxsQ",
     authDomain: "music-matters-229420.firebaseapp.com",
     databaseURL: "https://music-matters-229420.firebaseio.com",
@@ -8,11 +17,13 @@ var firebaseConfig = {
     messagingSenderId: "939526187420",
     appId: "1:939526187420:web:9bfd8eb38ec627a575c059"
   };
+
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
 
-
+  //This function is used to sign in to the website. The actual data for this is stored in firebase.
   function signIn() {
 		var email = document.getElementById('email').value;
 		var password = document.getElementById('password').value;
@@ -30,6 +41,7 @@ var firebaseConfig = {
 
   	}
 
+	  //This function detects if the authintication has changed (either signed out to signed in or reversed)
 	  firebase.auth().onAuthStateChanged(function(user){
   
 		if(user){
@@ -44,6 +56,8 @@ var firebaseConfig = {
 
 	});
 
+
+	//This function is used to sign out of the website. This is needed to test some functions.
 	function signOut() {
 	firebase.auth().signOut().then(() => {
 		alert("You have been signed out");

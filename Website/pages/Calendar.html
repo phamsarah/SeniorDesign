@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='lib/main.css' rel='stylesheet' />
+<script src='lib/main.js'></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+<script src="../js/firebase.js"></script>
+<script>
+
+  console.log("Test 0");
+
+  var amountOfEntries = 0;
+  var entryList = [
+    {
+      id: 'a',
+      title: 'my_event',
+      start: '2021-03-04',
+      className: 'Test Time',
+      color: 'orange'
+    },
+    {
+      id: 'b',
+      title: 'my_second_event',
+      start: '2021-03-05',
+      className: "Test Time",
+      color: 'orange'
+    }
+  ];
+
+  var dayVal = "";
+  for (var i = 1; i < 20; i++) {
+    if (i < 10) {
+      dayVal = '2021-03-0' + i.toString();
+    }
+    else {
+      dayVal = '2021-03-' + i.toString();
+    }
+    entryList[i+1] = {
+      id: i.toString(), 
+      title: 'my_event_' + i.toString(), 
+      start: dayVal,
+      className: 'Test Time', 
+      color: 'orange'}
+  }
+
+  var entryList2 = [
+    {
+      title: "Error test",
+      start: undefined,
+      className: 'Venues',
+      color: 'pink'
+    },
+    {
+      title: 'test_event', 
+      start: '2021-03-10',
+      className: 'Venues', 
+      color: 'pink'
+    }
+  ];
+
+  function testfuction(){
+  var currentEntry = 1;
+  var userDataRef = firebase.database().ref("database/events").orderByKey();
+  userDataRef.once("value").then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();
+
+          var date_val = childSnapshot.val().date;
+          var clientName_val = childSnapshot.val().clientName;
+          if (clientName_val == "" || undefined) {
+              clientName_val = "No name assigned";
+          }
+
+          console.log(date_val + ', ' + clientName_val);
+
+          entryList2[currentEntry + 1] = {
+            title: clientName_val,
+            start: date_val,
+            className: 'Venues',
+            color: 'pink'
+          }
+
+          console.log(entryList2);
+            
+          currentEntry += 1;
+          amountOfEntries += 1;
+      });
+      console.log("Test 1 Entry Count: " + amountOfEntries);
+  });
+  // Entry Counter
+
+  console.log("Test 2 Entry Count: " + amountOfEntries);
+  }
+
+  function testlist(entryList2) {
+    for (i in entrylist2){
+      x += entrylist2[i];
+      return x;
+    }
+  }
+  // Events Scan and Creation
+
+  // Calendar
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,listYear'
+      },
+
+      businessHours: true,
+
+      businessHours: {
+        daysOfWeek: [1, 2, 3, 4, 5], 
+        startTime: '10:00',
+        endTime: '18:00'
+
+      },
+      showNonCurrentDates: false,
+      fixedWeekCount: false,
+      navLinks: true,
+      selectable: true,
+      selectMirror: true,
+      select: function(arg) {
+        var title = prompt('Performer:');
+        var start = prompt('Time of performance (in hh:mm format):');
+        if (title) {
+          calendar.addEvent({
+            title: title,
+            start: start,
+            end: arg.end,
+            allDay: arg.allDay
+          })
+        }
+        calendar.unselect()
+      },
+      eventClick: function(arg) {
+        if (confirm('This will permenately delete this person, are you sure you want to delete this?')) {
+          arg.event.remove()
+        }
+      },
+      editable: true,
+      dayMaxEvents: true,
+
+
+      displayEventTime: false, // don't show the time column in list view
+
+      // THIS KEY WON'T WORK IN PRODUCTION!!!
+      // To make your own Google API key, follow the directions here:
+      // http://fullcalendar.io/docs/google_calendar/
+      googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
+
+      eventSources: [
+        {
+          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
+          className: 'holiday',
+          color: 'lightblue'
+        },
+        {
+          googleCalendarId: 'c5lcbj68ffn0gh1nt9q0ndg9uo@group.calendar.google.com',
+          className: 'auburn-football',
+          color: 'blue'
+        },
+        {
+          googleCalendarId: 'uiptf7l51eoa5cm19gffbvlj4s@group.calendar.google.com',
+          className: 'alabama-football',
+          color: 'crimson'
+        },
+        
+      ],
+
+
+      eventClick: function(arg) {
+        // opens events in a popup window
+        window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
+
+        arg.jsEvent.preventDefault() // don't navigate in main tab
+      },
+
+      loading: function(bool) {
+        document.getElementById('loading').style.display =
+          bool ? 'block' : 'none';
+      }
+
+    });
+    calendar.render();
+  });
+  
+
+</script>
+<style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #loading {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  #calendar {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+</style>
+</head>
+<body>
+
+  <div id='loading'>loading...</div>
+
+  <div id='calendar'></div>
+
+</body>
+</html>

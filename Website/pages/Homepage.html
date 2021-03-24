@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿<!--
+This file is used for the "Homepage" section of the website. All functionality within the homepage tab that doesn't use firebase
+will be found here.
+-->
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +23,11 @@
         p {
             font-size: 200%;
             color: rgb(255, 255, 255);
+        }
+
+        p2 {
+            font-size: 120%;
+            color:rgb(60, 156, 255);
         }
 
         .sidebar {
@@ -81,17 +91,18 @@
 </head>
 <body>
 
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <script src="../js/firebase.js"></script>
+
     <div class="sidebar">
         <a class="active" a href="#venue"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="140" height="140"><br><br>Venue</a>
         <!--<a href="#bookings">Bookings</a>-->
 		<a href="Bookings.html">Bookings</a>
         <a href="Clients.html">Clients</a>
         <a href="Documents.html">Documents</a>
-
-        <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		<script src="../js/firebase.js"></script>
 
         <center>
         <input id="signOut" style=font-size:110% type="button" value="Sign Out" onclick="signOut();" />
@@ -100,38 +111,57 @@
 
     <div class="content">
         <center>
-            <h2>MusicMatters Venue</h2>
-            <p>Calender will go here</p>
-        
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		    <script src="../js/firebase.js"></script>
-
-            <script>
-
-               // Firebase setup and access
-            
-                var firebaseConfig = {
-                    apiKey: "AIzaSyABrXbvSkA_LqT0zKSTJ3_JHqNcxgyuxsQ",
-                    authDomain: "music-matters-229420.firebaseapp.com",
-                    databaseURL: "https://music-matters-229420.firebaseio.com",
-                    projectId: "music-matters-229420",
-                    storageBucket: "music-matters-229420.appspot.com",
-                    messagingSenderId: "939526187420",
-                    appId: "1:939526187420:web:9bfd8eb38ec627a575c059"
-                };
-                // Initialize Firebase
-                firebase.initializeApp(firebaseConfig);
-            
-                var clientDB = firebase.database().ref('database/clients/')
-                clientDB.on('value', function(snapshot){
-                    console.log(snapshot.val())
-                    display_data(snapshot.val());
-                });
-
-            </script>
+            <!--<p>Calender will go here</p>-->
+            <object style="width:100%;height:120vh;" type="text/html" data="Calendar.html"></object>
         </center>
+
+        <p2 id="contentDisplay"></p2>
+
+        <script>
+            var contentHTML = "";
+            var currentVal = 1;
+
+            var userDataRef = firebase.database().ref("database/venues").orderByKey();
+            userDataRef.once("value").then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key;
+                    var childData = childSnapshot.val();
+
+                    var allConfirmationsLastSent_val = childSnapshot.val().allConfirmationsLastSent; // Works
+                    var allInvoicesLastSent_val = childSnapshot.val().allInvoicesLastSent; // Works
+                    var artistConfirmationSendOut_val = childSnapshot.val().artistConfirmationSendOut; // Works
+                    var artistInvoiceSendOut_val = childSnapshot.val().artistInvoiceSendOut; // Works
+                    var bookingListLastSent_val = childSnapshot.val().bookingListLastSent; // Works
+                    var calendarLastSent_val = childSnapshot.val().calendarLastSent; // Works
+                    var email_val = childSnapshot.val().email; // Works
+                    var monthlyBookingListSendOut_val = childSnapshot.val().monthlyBookingListSendOut; // Works
+                    var monthlyCalendarSendOut_val = childSnapshot.val().monthlyCalendarSendOut; // Works
+                    var name_val = childSnapshot.val().name; // Works
+
+                    contentHTML += "----------------------------------"
+                        + "<br>Venue #" + currentVal + ": " + name_val
+                        + "<br>Venue Email: " + email_val
+                        + "<br>All Confirmations Last Sent: " + allConfirmationsLastSent_val 
+                        + "<br>All Invoices Last Sent: " + allInvoicesLastSent_val
+                        + "<br>Artist Confirmation Send out: " + artistConfirmationSendOut_val
+                        + "<br>Artist Invoice Send Out: " + artistInvoiceSendOut_val
+                        + "<br>Booking List Last Sent: " + bookingListLastSent_val
+                        + "<br>Calendar Last Sent: " + calendarLastSent_val
+                        + "<br>Monthly Booking List Send Out: " + monthlyBookingListSendOut_val
+                        + "<br>Monthly Calendar Send Out: " + monthlyCalendarSendOut_val
+                        //+ "<br>Venue Name: " + name_val
+                        + "<br>";//----------------------------------<br>";
+
+                    document.getElementById("contentDisplay").innerHTML = contentHTML;
+                    currentVal = currentVal + 1;
+                });
+            });
+
+            // contentHTML += "Test";
+
+            //document.getElementById("contentDisplay").innerHTML = contentHTML;
+
+        </script>
     </div>
 
 </body>

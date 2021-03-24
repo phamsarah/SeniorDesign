@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿<!--
+This file is used for the "Bookings" section of the website. All functionality within the bookings tab that doesn't use firebase
+will be found here.
+-->
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +24,11 @@
         p {
             font-size: 200%;
             color: rgb(255, 255, 255);
+        }
+
+        p2 {
+            font-size: 120%;
+            color:rgb(60, 156, 255);
         }
 
         .sidebar {
@@ -54,6 +64,7 @@
             margin-left: 200px;
             padding: 1px 16px;
             height: 1000px;
+            color:rgb(60, 156, 255);
         }
 
         @media screen and (max-width: 1000px) {
@@ -82,16 +93,17 @@
 </head>
 <body>
 
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <script src="../js/firebase.js"></script>
+
     <div class="sidebar">
         <a href="Homepage.html">Venue</a>
 		<a class="active" a href="#bookings"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="140" height="140"><br><br>Bookings</a>
         <a href="Clients.html">Clients</a>
         <a href="Documents.html">Documents</a>
-
-        <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		<script src="../js/firebase.js"></script>
 
         <center>
         <input id="signOut" style=font-size:110% type="button" value="Sign Out" onclick="signOut();" />
@@ -102,8 +114,63 @@
     <div class="content">
         <center>
             <h2>MusicMatters Bookings</h2>
-            <p>Bookings will go here</p>
+            <!--<p>Bookings will go here</p>-->
         </center>
+            <p2 id="contentDisplay"></p2>
+
+            <script>
+                var currentVal = 1;
+                var contentHTML = "";
+
+                var userDataRef = firebase.database().ref("database/events").orderByKey();
+                userDataRef.once("value").then(function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var key = childSnapshot.key;
+                        var childData = childSnapshot.val();
+
+                        var client_val = childSnapshot.val().client; // Works
+                        var clientName_val = childSnapshot.val().clientName; // Names are empty in database, so unsure if it works
+                        if (clientName_val == "") {
+                            clientName_val = "No name assigned";
+                        }
+                        var confirmationLastSent_val = childSnapshot.val().confirmationLastSent; // Works
+                        if (confirmationLastSent_val == "") {
+                            confirmationLastSent_val = "Never";
+                        }
+                        var date_val = childSnapshot.val().date; // Works
+                        var end_val = childSnapshot.val().end; // Works
+                        var invoiceLastSent_val = childSnapshot.val().invoiceLastSent; // Works
+                        if (invoiceLastSent_val == "") {
+                            invoiceLastSent_val = "Never";
+                        }
+                        var month_val = childSnapshot.val().month; // Works
+                        var price_val = childSnapshot.val().price; // Works
+                        if (price_val == 0) {
+                            price_val = "No Price Assigned";
+                        }
+                        var start_val = childSnapshot.val().start; // Works
+                        var venue_val = childSnapshot.val().venue; // Works
+
+                        contentHTML += "----------------------------------"
+                            + "<br>Client #" + currentVal
+                            + "<br>Client Name: " + clientName_val
+                            + "<br>Client ID: " + client_val
+                            + "<br>Venue ID: " + venue_val
+                            + "<br>Price: " + price_val
+                            + "<br>Date: " + date_val
+                            + "<br>Month: " + month_val
+                            + "<br>Start Time: " + start_val
+                            + "<br>End Time: " + end_val
+                            + "<br>Last Invoice Sent: " + invoiceLastSent_val
+                            + "<br>Last Confirmation Sent: " + confirmationLastSent_val
+                            + "<br>";//----------------------------------<br>";
+
+                        document.getElementById("contentDisplay").innerHTML = contentHTML;
+                        currentVal = currentVal + 1;
+                    });
+                });
+
+            </script>
     </div>
 
 

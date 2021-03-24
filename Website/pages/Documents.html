@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<!--
+This file is used for the "documents" section of the website. All functionality within the documents tab that doesn't use firebase
+will be found here.
+-->
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +22,11 @@
         p {
             font-size: 200%;
             color: rgb(255, 255, 255);
+        }
+
+        p2 {
+            font-size: 120%;
+            color:rgb(60, 156, 255);
         }
 
         .sidebar {
@@ -81,17 +90,18 @@
 </head>
 <body>
 
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <script src="../js/firebase.js"></script>
+
     <div class="sidebar">
 		<a href="Homepage.html">Venue</a>
         <a href="Bookings.html">Bookings</a>
         <a href="Clients.html">Clients</a>
 		<a class="active" a href="#documents"><img src="../images/icon-transparent.png" alt="Icon Transparent" width="140" height="140"><br><br>Documents</a>
         
-        <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-
-		<script src="../js/firebase.js"></script>
-
         <center>
         <input id="signOut" style=font-size:110% type="button" value="Sign Out" onclick="signOut();" />
         </center>
@@ -102,7 +112,39 @@
         <center>
             <h2>MusicMatters Documents</h2>
             <p>Documents will go here</p>
+
+            <iframe src="https://calendar.google.com/calendar/htmlembed?src=ncaaf_75_%2541uburn%2B%2554igers%23sports%40group.v.calendar.google.com&ctz=America%2FChicago&src=ncaaf_73_%2541labama%2B%2543rimson%2B%2554ide%23sports%40group.v.calendar.google.com&ctz=America%2FChicago" style="border: 0" width="100%" height="550vh" frameborder="0" scrolling="no"></iframe>
+        
         </center>
+        <p2 id="contentDisplay"></p2>
+
+        <script>
+            /**
+            var currentVal = 1;
+            var contentHTML = "";
+
+            var userDataRef = firebase.database().ref("database/footballGames").orderByKey();
+            userDataRef.once("value").then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key;
+                    var childData = childSnapshot.val();
+
+                    var val_2019 = childSnapshot.val().year2019;
+                    var val_2020 = childSnapshot.val().year2020;
+                    var val_2021 = childSnapshot.val().year2021;
+
+                    contentHTML += "----------------------------------"
+                        + "<br>2019: " + val_2019
+                        + "<br>2020: " + val_2020
+                        + "<br>2021: " + val_2021
+                        + "<br>";//----------------------------------<br>";
+
+                    document.getElementById("contentDisplay").innerHTML = contentHTML;
+                    currentVal = currentVal + 1;
+                });
+            });
+            */
+        </script>
     </div>
 
 </body>
