@@ -23,12 +23,6 @@ if (!isset($_GET['start']) || !isset($_GET['end'])) {
 $range_start = parseDateTime($_GET['start']);
 $range_end = parseDateTime($_GET['end']);
 
-// Parse the timeZone parameter if it is present.
-$time_zone = null;
-if (isset($_GET['timeZone'])) {
-  $time_zone = new DateTimeZone($_GET['timeZone']);
-}
-
 // Read and parse our events JSON file into an array of event data arrays.
 $json = file_get_contents(dirname(__FILE__) . '/../json/events.json');
 $input_arrays = json_decode($json, true);
