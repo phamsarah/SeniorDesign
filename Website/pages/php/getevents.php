@@ -30,7 +30,7 @@ if (isset($_GET['timeZone'])) {
 }
 
 // Read and parse our events JSON file into an array of event data arrays.
-$json = file_get_contents(dirname(__FILE__) . '/../json/eventss.json');
+$json = file_get_contents(dirname(__FILE__) . '/../test.json');
 $input_arrays = json_decode($json, true);
 
 // Accumulate an output array of event data arrays.
@@ -48,3 +48,4 @@ foreach ($input_arrays as $array) {
 
 // Send JSON to the client.
 echo json_encode($output_arrays);
+?>

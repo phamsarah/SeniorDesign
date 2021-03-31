@@ -10,25 +10,6 @@
 <script src="../js/firebase.js"></script>
 <script>
 
-  console.log("Test 0");
-
-  var amountOfEntries = 0;
-  var entryList = [
-    {
-      id: 'a',
-      title: 'my_event',
-      start: '2021-03-04',
-      className: 'Test Time',
-      color: 'orange'
-    },
-    {
-      id: 'b',
-      title: 'my_second_event',
-      start: '2021-03-05',
-      className: "Test Time",
-      color: 'orange'
-    }
-  ];
 
   
 
@@ -91,8 +72,20 @@
       // http://fullcalendar.io/docs/google_calendar/
       googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
 
+      resources: [
+        
+        {
+          url: 'test.json',
+          format: 'json'
+        }
+      ],
+
       eventSources: [
         {
+          url: 'https://music-matters-229420.firebaseio.com/database/events.json',
+          format: 'json'
+        },
+      {
           googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
           className: 'holiday',
           color: 'lightblue'
@@ -107,11 +100,9 @@
           className: 'alabama-football',
           color: 'crimson'
         },
-        {
-          url: 'php/getevents.php',
-        }
+       
       ],
-
+      
 
       eventClick: function(arg) {
         // opens events in a popup window
@@ -126,6 +117,7 @@
       }
 
     });
+    calendar.refetchEvents()
     calendar.render();
   });
   
