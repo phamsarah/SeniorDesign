@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Alert,
-  AlertIOS,
   Button,
   FlatList,
   StyleSheet,
@@ -12,28 +11,19 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { Venue, Client } from '../objects';
+import { Venue } from '../objects';
 import Database from '../Database';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 import AppContainer from '../components/AppContainer';
 import Styles from '../styles';
 import _ from 'lodash';
 import { ScrollView } from 'react-native-gesture-handler';
-import { KeyboardAvoidingView, Picker } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
 import styles from '../styles';
-import { toAMPM, objectToArray, toMonthString } from '../util';
+import { toAMPM } from '../util';
 import TimeInput from '../components/TimeInput';
 import { ClientStyles } from './ClientViews';
-import Firebase from 'firebase';
 import { Dimensions, Platform, PixelRatio } from 'react-native';
-import * as Font from 'expo-font';
-import {
-  useFonts,
-  BalsamiqSans_400Regular,
-  BalsamiqSans_400Regular_Italic,
-  BalsamiqSans_700Bold,
-  BalsamiqSans_700Bold_Italic,
-} from '@expo-google-fonts/balsamiq-sans';
 
 @withMappedNavigationProps()
 export class ManageVenues extends React.Component {
@@ -102,26 +92,6 @@ export class ManageVenues extends React.Component {
 
           <Text style={VenueStyles.main_font}>(Booking System)</Text>
         </View>
-        {/*<View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <FlatList
-            style={Styles.listContainer}
-            data={this.props.database.venues.map((venue) => {
-              return {
-                key: venue.id,
-                data: venue,
-              };
-            })}
-            renderItem={(data) => this._renderVenue(data.item.data)}
-          />
-        
-        </View>
-        */}
         <View style={{ marginTop: 10 }}>
           <Text> </Text>
         </View>
@@ -182,43 +152,7 @@ export class ManageVenues extends React.Component {
             justifyContent: 'center',
           }}
         >
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Button
-              title='Bookings'
-              onPress={() =>
-                this.props.navigation.navigate('Venue', {
-                  database: this.props.database,
-                  onSave: (venue) => {
-                    this.props.database.addVenue(venue).then((venue) => {
-                      this.forceUpdate();
-                    });
-                  },
-                })
-              }
-            />
-          </View>
-
-          <View>
-            <Button
-              title='Documents'
-              onPress={() =>
-                this.props.navigation.navigate('Venue', {
-                  database: this.props.database,
-                  onSave: (venue) => {
-                    this.props.database.addVenue(venue).then((venue) => {
-                      this.forceUpdate();
-                    });
-                  },
-                })
-              }
-            />
-          </View>
-        </View>
+      </View>
       </AppContainer>
     );
   }
