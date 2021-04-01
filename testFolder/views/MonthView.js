@@ -1,15 +1,13 @@
 import React from 'react';
-import {randomColor, toDateString, toDateTime, toMonthString, blackColor} from "../util";
+import {randomColor, toDateString, toDateTime} from "../util";
 import Styles from "../styles";
 import {CalendarList} from "react-native-calendars";
 import _ from "lodash";
-import Dropdown from "../components/Dropdown";
 import AppContainer from "../components/AppContainer";
-import MoreButton from "../components/MoreButton";
 import {Venue} from "../objects";
 import Database from "../Database";
 import PropTypes from 'prop-types';
-import {Button, View, Alert} from 'react-native';
+import {Button, View, Text} from 'react-native';
 import {withMappedNavigationProps} from "react-navigation-props-mapper";
 
 @withMappedNavigationProps()
@@ -102,32 +100,13 @@ class MonthView extends React.Component {
         return markedDates;
     }
 
-    render() {
+    render(venue) {
         return (
             <AppContainer>
                 <View style={Styles.calendarHeader}>
-                    <Dropdown style={Styles.calendarDropdown}
-                        options = {this.props.database.venues.map(venue => {
-                            return {
-                                label: venue.name,
-                                value: venue.id
-                            };
-                        })}
-                        selectedValue = {this.props.selectedVenue.id}
-                        onValueChange = {venueID => {
-                            if (venueID !== null) {
-                                this.setState({selectedValue: this.props.database.venues.find(venue => venue.id === venueID)});
-                            }
-                        }}
-                    />
-                    <MoreButton
-                        onPress={() => this.props.navigation.navigate("VenueManage", {
-                            database: this.props.database,
-                            onReturn: venues => {
-                                console.log(venues);
-                            }
-                        })}
-                    />
+                <Text style= {Styles.calendarHeaderTitle}>
+                         {this.props.selectedVenue.name}
+                    </Text>
                 </View>
                 <CalendarList style={Styles.monthView}
                     horizontal = {true}

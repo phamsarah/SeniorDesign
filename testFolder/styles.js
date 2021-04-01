@@ -11,13 +11,25 @@ export default StyleSheet.create({
   },
   calendarHeader: {
     height: Platform.OS === 'android' ? 40 : 30,
+    marginTop: 20,
+    fontSize:30,
     display: 'flex',
     flexDirection: 'row',
-    paddingLeft: Platform.OS === 'android' ? 0 : 10,
+    paddingLeft: Platform.OS === 'android' ? 30 : 10,
   },
   calendarDropdown: {
     flexGrow: 15,
     flexBasis: 0,
+  },
+  calendarHeaderTitle:{
+    marginRight: 5,
+    marginTop: 5,
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
+    flexGrow: 1,
+    flexBasis: 0,
+    textAlign: 'center',
   },
   infoView: {
     justifyContent: 'space-between',
