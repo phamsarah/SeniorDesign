@@ -54,16 +54,14 @@ function generateCalendarTable(startDate, events) {
     });
 
     matchingEvents.forEach((event, i) => {
-      // if (i < 2) {
       cellArray.push({
-        text: [Util.event.start, Util.event.end].join(' to '),
+        text: Util.toAMPM(event.start) + ' to ' + Util.toAMPM(event.end),
         style: 'dateTimeslot',
       });
       cellArray.push({
         text: event.client.stage,
         style: 'dateClient',
       });
-      // }
     });
 
     //add new date box to most recent week added
@@ -179,7 +177,7 @@ exports.generateInvoice = function (event, client, venue) {
   let content = [];
 
   [
-    venue.name + ' ' + venue.address.city + ',' + venue.address.toUpperCase(),
+    venue.name + ' ' + venue.address.city + ',' + venue.address.state,
     'LIVE PERFORMANCE CONTRACT/CONFIRMATION',
     'INVOICE',
     'MUSICMATTERSBOOKINGS.COM',
