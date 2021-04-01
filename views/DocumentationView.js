@@ -640,6 +640,29 @@ export default class DocumentationView extends React.Component {
                                 err
                             );
                           })
+                          .finally(() => {	
+                            this.setState({	
+                              disableSendingConfirmation: false,	
+                              // display: {	
+                              //     confirmation: this.generateArtistConfirmationDisplay(),	
+                              //     invoice: this.state.display.invoice,	
+                              //     bookinglist: this.state.bookinglist,	
+                              //     calendar: this.state.display.calendar,	
+                              //     allConfirmations: this.state.display.allConfirmations,	
+                              //     allInvoices: this.state.display.allInvoices	
+                              // }	
+                            });	
+                          });	
+  
+                        alert(	
+                          'The artist confirmation is being generated, saved to the Google Drive, and emailed out.' +	
+                            ' Please wait until this has complete before requesting again.' +	
+                            ' This may take up to a minute to complete.'	
+                        );	
+  
+                        this.setState({	
+                          disableSendingConfirmation: true,	
+                        });
                       },
                     },
                   ],
