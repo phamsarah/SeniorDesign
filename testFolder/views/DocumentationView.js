@@ -6,25 +6,11 @@ import {
   Button,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { RadioGroup } from 'react-native-btr';
-import DateTimePicker from 'react-native-modal-datetime-picker/src/index';
 import Styles from '../styles';
-import {
-  toAMPM,
-  toDateString,
-  toDateTime,
-  toMilitaryTime,
-  toTimeString,
-  toUS,
-} from '../util';
 import Database from '../Database';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import Dropdown from '../components/Dropdown';
-import TimeInput from '../components/TimeInput';
 import AppContainer from '../components/AppContainer';
 import { Dimensions, Platform, PixelRatio } from 'react-native';
 
@@ -290,13 +276,6 @@ export default class DocumentationView extends React.Component {
 
     // Else, the invoice send out day has occured so the invoice has guaranteed to be sent, banner should read "Last Sent: "
     else {
-      // let lastSentDate = new Date(event.invoiceLastSent);
-      // return (
-      // // <View>
-      //     <Text style={DocumentationStyles.entryInfo}>
-      //     {"Last sent: " + this.state.months[lastSentDate.getMonth()] + " " + lastSentDate.getDate() + ", " + lastSentDate.getFullYear()}
-      //     </Text>);
-      // // </View>)
       let lastSentDate = new Date(event.invoiceLastSent);
       return (
         <View style={DocumentationStyles.entryInfo}>
@@ -1043,76 +1022,7 @@ export default class DocumentationView extends React.Component {
             />
           </View>
         </View>
-
-        <View style={DocumentationStyles.entryContainer}>
-          <Text style={DocumentationStyles.entryName}>
-            {this.state.banners.calendar}
-          </Text>
-          {/* {this.state.display.calendar} */}
-          <View style={DocumentationStyles.entryButton}>
-            <Button
-              title='Send'
-              disabled={this.state.disableSendingCalendar}
-              onPress={() => {
-                Alert.alert(
-                  'Confirmation',
-                  'Are you sure you want to send the calendar for the selected month?',
-                  [
-                    {
-                      text: 'Cancel',
-                    },
-                    {
-                      text: 'OK',
-                      onPress: () => {
-                        this.props.database
-                          .generateSendSaveOne({
-                            type: 'calendar',
-                            venueID: this.props.venue.id,
-                            month: this.props.date.getMonth() + 1,
-                            year: this.props.date.getFullYear(),
-                          })
-                          .then(() => {
-                            alert('Calendar successfully sent!');
-                          })
-                          .catch((err) => {
-                            alert(
-                              'An error occurred while sending the calendar.\n' +
-                                err
-                            );
-                          })
-                          .finally(() => {
-                            this.setState({
-                              disableSendingCalendar: false,
-                              // display: {
-                              //     confirmation: this.state.display.confirmation,
-                              //     invoice: this.state.display.invoice,
-                              //     bookinglist: this.state.display.bookinglist,
-                              //     calendar: this.generateCalendarDisplay(),
-                              //     allConfirmations: this.state.display.allConfirmations,
-                              //     allInvoices: this.state.display.allInvoices
-                              // }
-                            });
-                          });
-
-                        alert(
-                          'The calendar is being generated, saved to the Google Drive, and emailed out.' +
-                            ' Please wait until this has complete before requesting again.' +
-                            ' This may take up to a minute to complete.'
-                        );
-
-                        this.setState({
-                          disableSendingCalendar: true,
-                        });
-                      },
-                    },
-                  ],
-                  { cancelable: true }
-                );
-              }}
-            />
-          </View>
-        </View>
-  </AppContainer>
+</AppContainer>
     );
   }
 }
@@ -1141,19 +1051,6 @@ export function giveProperSize(size) {
 
 export const DocumentationStyles = StyleSheet.create({
   entryContainer: {
-    // backgroundColor: "#fff",
-    // display: "flex",
-    // flex: giveProperSize(SCREEN_HEIGHT),
-    // flexDirection: "column",
-    // fontSize: normalize(24),
-    // padding: 4,
-    // margin: 12,
-    // borderWidth: 1,
-    // borderRadius: 10,
-    // borderColor: "#ccc",
-    // alignItems: "flex-start",
-    // textAlign: "left",
-    // height: 64,
     backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'row',
@@ -1169,17 +1066,12 @@ export const DocumentationStyles = StyleSheet.create({
     marginLeft: 15,
   },
   entryName: {
-    // flexGrow: 3,
-    // flexBasis: 60,
-    // fontSize: 20,
-    // color: "pink"
     flexGrow: 3,
     flexBasis: 60,
     fontSize: 20,
   },
   entryInfo: {
     flexGrow: 3,
-    // flexBasis: 60,
     flexBasis: 10,
     fontSize: normalize(15),
     color: '#808080',
@@ -1206,30 +1098,21 @@ export const DocumentationStyles = StyleSheet.create({
     display: 'flex',
     flex: 5,
     flexDirection: 'column',
-    //font-size: 18px,
     padding: 4,
     margin: 12,
-    //borderWidth: 1,
-    //borderRadius: 10,
-    //borderColor: "#ccc",
     alignItems: 'flex-start',
     textAlign: 'left',
     height: 64,
-    //justifyContent: "center"
   },
   sendButton: {
     backgroundColor: '#f8f8f8',
-    //display: "flex",
     flexDirection: 'row',
-    //padding: 20,
-    //margin: 10,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: '#ccc',
     alignItems: 'center',
     textAlign: 'center',
     justifyContent: 'center',
-    //left: 12,
     position: 'relative',
     bottom: normalize(26),
     left: normalize(208),
