@@ -100,7 +100,7 @@ class MonthView extends React.Component {
         return markedDates;
     }
 
-    render(venue) {
+    render() {
         return (
             <AppContainer>
                 <View style={Styles.calendarHeader}>

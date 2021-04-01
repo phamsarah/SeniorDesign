@@ -117,36 +117,10 @@ export default class DayView extends React.Component {
     return (
       <AppContainer>
         <View style={Styles.calendarHeader}>
-          <Dropdown
-            style={Styles.calendarDropdown}
-            options={this.props.database.venues.map((venue) => {
-              return {
-                label: venue.name,
-                value: venue.id,
-              };
-            })}
-            selectedValue={this.state.selectedVenue.id}
-            onValueChange={(venueID) => {
-              if (venueID !== null) {
-                this.setState({
-                  selectedVenue: this.props.database.venues.find(
-                    (venue) => venue.id === venueID
-                  ),
-                });
-              }
-            }}
-          />
-          <MoreButton
-            onPress={() =>
-              this.props.navigation.navigate('VenueManage', {
-                database: this.props.database,
-                onReturn: (venues) => {
-                  console.log(venues);
-                },
-              })
-            }
-          />
-        </View>
+                <Text style= {Styles.calendarHeaderTitle}>
+                         {this.props.selectedVenue.name}
+                    </Text>
+                </View>
         <Agenda
           hideKnob={true}
           selected={toDateString(this.props.selectedDate)}
