@@ -3467,7 +3467,7 @@ var FullCalendar = (function (exports) {
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(EventApi.prototype, "start", {
+        Object.defineProperty(EventApi.prototype, "date", {
             get: function () {
                 return this._instance ?
                     this._context.dateEnv.toDate(this._instance.range.start) :
