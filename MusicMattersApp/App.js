@@ -6,8 +6,8 @@ import {
 import DayView from './views/DayView';
 import EventView from './views/EventView';
 import MonthView from './views/MonthView';
-import { ManageVenues, VenueView } from './views/VenueViews';
-import { VenueView2 } from './views/VenueViews2';
+import { CreateEditVenue, VenueList } from './views/VenueViews';
+import { Homepage } from './views/Homepage';
 import { ClientView, ManageClients } from './views/ClientViews';
 import Database from './Database';
 import {
@@ -47,7 +47,7 @@ class LoadingScreen extends React.Component {
       db.getVenues(),
     ])
       .then((values) => {
-        this.props.navigation.navigate('VenueManage', {
+        this.props.navigation.navigate('Homepage', {
           database: db,
         });
       })
@@ -68,15 +68,15 @@ const AppStack = createStackNavigator(
     Month: MonthView,
     Day: DayView,
     Event: EventView,
-    Venue: VenueView,
-    Venue2: VenueView2,
-    VenueManage: ManageVenues,
+    CreateEditVenue: CreateEditVenue,
+    VenueList: VenueList,
+    Homepage: Homepage,
     Client: ClientView,
     ClientManage: ManageClients,
     Documentation: DocumentationView,
   },
   {
-    initialRouteName: 'VenueManage',
+    initialRouteName: 'Homepage',
     headerMode: 'none',
     cardOverlayEnabled: true,
   }

@@ -26,7 +26,7 @@ import { ClientStyles } from './ClientViews';
 import { Dimensions, Platform, PixelRatio } from 'react-native';
 
 @withMappedNavigationProps()
-export class ManageVenues extends React.Component {
+export class VenueList extends React.Component {
   static propTypes = {
     database: PropTypes.instanceOf(Database).isRequired,
   };
@@ -53,7 +53,7 @@ export class ManageVenues extends React.Component {
           <Button
             title='⚙️🔧'
             onPress={() =>
-              this.props.navigation.navigate('Venue', {
+              this.props.navigation.navigate('CreateEditVenue', {
                 venue: venue,
                 database: this.props.database,
                 onSave: (venue) => {
@@ -85,22 +85,6 @@ export class ManageVenues extends React.Component {
             style={VenueStyles.icon}
           />
         </View>
-        <View style={{ alignItems: 'center' }}>
-          <Text style={VenueStyles.main_font}>Music Matters</Text>
-
-          <Text style={VenueStyles.main_font}>BS</Text>
-
-          <Text style={VenueStyles.main_font}>(Booking System)</Text>
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <Text> </Text>
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <Text> </Text>
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <Text> </Text>
-        </View>
         <View
           style={{
             flexDirection: 'row',
@@ -108,58 +92,42 @@ export class ManageVenues extends React.Component {
             justifyContent: 'center',
           }}
         >
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Button
-              title='Client'
-              onPress={() => {
-                this.props.navigation.navigate('ClientManage', {
-                  database: this.props.database,
-                });
-              }}
-            />
+          <View style={{ marginTop: 10 }}>
+            <Text> </Text>
           </View>
-
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Button
-              title='Venue'
-              onPress={() =>
-                this.props.navigation.navigate('Venue2', {
-                  database: this.props.database,
-                  onSave: (venue) => {
-                    this.props.database.addVenue(venue).then((venue) => {
-                      this.forceUpdate();
-                    });
-                  },
-                })
-              }
-            />
-          </View>
+          <FlatList
+            style={Styles.listContainer}
+            data={this.props.database.venues.map((venue) => {
+              return {
+                key: venue.id,
+                data: venue,
+              };
+            })}
+            renderItem={(data) => this._renderVenue(data.item.data)}
+          />
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-      </View>
+        <View style={Styles.buttonContainer}>
+          <Button
+            title='Add New Venue'
+            onPress={() =>
+              this.props.navigation.navigate('CreateEditVenue', {
+                database: this.props.database,
+                onSave: (venue) => {
+                  this.props.database.addVenue(venue).then((venue) => {
+                    this.forceUpdate();
+                  });
+                },
+              })
+            }
+          />
+        </View>
       </AppContainer>
     );
   }
 }
 
 @withMappedNavigationProps()
-export class VenueView extends React.Component {
+export class CreateEditVenue extends React.Component {
   static propTypes = {
     venue: PropTypes.instanceOf(Venue),
     onSave: PropTypes.func.isRequired,
@@ -843,16 +811,6 @@ export function normalize(size) {
 
 const VenueStyles = StyleSheet.create({
   entryContainer: {
-    //width: "100%",
-    //backgroundColor: "#eee",
-    //display: "flex",
-    //flexDirection: "row",
-    //padding: 10,
-    //borderBottomWidth: 1,
-    //borderColor: "#ccc",
-    //alignItems: "center",
-    //justifyContent: "space-between"
-    //fontSize: normalize(24),
     backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'row',
