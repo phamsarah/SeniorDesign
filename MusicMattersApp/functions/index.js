@@ -52,7 +52,6 @@ exports.docSendOut = Functions.pubsub.schedule("every day 08:00")
         
                     // If today is the artist invoice send out day for the venue, generate and send them
                     if (venue.artistInvoiceSendOut === today.getDate().toString()) {
-                        console.log(`[*] venue for invoices: ${venue.name}`);
                         jobs.push(() => genSendSaveAll({
                             type: "invoice",
                             venueID: venue.id,
@@ -257,7 +256,6 @@ const genSendSaveAll = function(data) {
             switch (data.type) {
                 case VALID_TYPES[0]: // artist_confirmation
                     jobs = processedData.events.map(event => {
-                        console.log(`Processed Venue: [${processedData.venue}]` )
                         return () => generateConfirmationOrInvoice(event, event.client, processedData.venue, 'Confirmation');
                     });
                     return Util.staggerPromises(jobs, 3000, 1).then(events => {
