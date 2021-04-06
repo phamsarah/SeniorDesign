@@ -39,7 +39,8 @@
     "react-navigation": "^3.3.0",
     "react-navigation-props-mapper": "^0.4.0",
     "simple-odf": "^0.10.1",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "@react-native-community/datetimepicker": "2.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.0.0"

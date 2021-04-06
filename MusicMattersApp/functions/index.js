@@ -257,8 +257,8 @@ const genSendSaveAll = function(data) {
             switch (data.type) {
                 case VALID_TYPES[0]: // artist_confirmation
                     jobs = processedData.events.map(event => {
-                        var data = [ event, event.client, processedData.venue ]
-                        return () => sendForm(data, 'Confirmation');
+                        console.log(`Processed Venue: [${processedData.venue}]` )
+                        return () => generateConfirmationOrInvoice(event, event.client, processedData.venue, 'Confirmation');
                     });
                     return Util.staggerPromises(jobs, 3000, 1).then(events => {
                         return venueDB.child(data.venueID).update({allConfirmationsLastSent: new Date().toString()});
@@ -266,8 +266,7 @@ const genSendSaveAll = function(data) {
 
                 case VALID_TYPES[1]: // invoice
                     jobs = processedData.events.map(event => {
-                        var data = [ event, event.client, processedData.venue ]
-                        return () => sendForm(data, 'Invoice');
+                        return () => generateConfirmationOrInvoice(event, event.client, processedData.venue, 'Invoice');
                     });
                     return Util.staggerPromises(jobs, 3000, 1).then(events => {
                         return venueDB.child(data.venueID).update({allInvoicesLastSent: new Date().toString()});
