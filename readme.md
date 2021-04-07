@@ -1,16 +1,21 @@
 Hello! This is the repository for COMP 4710: Senior Design Project in the Spring 2021 semester.
 We are working on a booking system for Music Matters, located in Montgomery, AL.
-If you're looking at this, you are presumably:
 
-- A member of the group
-- Our glorious professor, Dr. Kai Chang
-- Our glorious sponsor, Mike Moody
-- Someone curious about the work of one of the members of the group
-- Someone looking to improve the app after we've finished our work
+Spring 2021 Group - We split the teams into two:
+App Dev Team:
+- Sarah Pham (256-702-7184)
+- Chase Dumbacher
 
-Regardless of who you are, welcome! Here, I'll give some assistance on how you can get everything up and running.
+Web Dev Team:
+- Austin Mongold
+- Austin Newkirk
 
+
+Previous Team Repo:
 Fall 2020's Group 4 Repo: https://github.com/jphong1111/Senior_Project_Team_Cycle_4.git
+
+Welcome! Here, I'll give some assistance on how you can get everything up and running.
+
 
 # Requirements
 
@@ -76,20 +81,13 @@ This will get the app on TestFlight for all linked testers to test.
 
 # Known Issues and Wanted Functionality
 
-- Preset Time Slots
-- Previews of Documents in app
-- Conformations will go out to individual artist
-- Booking lists and calendar go to venue emails
-- Invoices go to the void
-- Edit User Interface to new User Interface
 - Possible Android Tablet or iPad Functionality
 - Ability to pull up calender on PC from firebase
-- Holidays and Football Games linked to Calendar
-- Change language from 'Add Event to Add Booking'
-- Change text from 'To whom it may concern' in invoices and confermations to the format Mike wants
-- Montgomery mispelled in confirmaitons
-- Invoices and confirmations email subject line needs to duplicate current email subject line language.
-- Language in artist's confirmation shown is not for The Renaissance/Exchange...It is for another venue.
+- Language in artist's confirmation shown is not for The Renaissance/Exchange...It is for another venue ( This is from Fall 2020 group, didn't see this issue - Sarah Spring 2021)
+- Many deprecated dependencies and sdks in the App code (May cause issues in the future)
+- Editing the date/time when clicking on a certain person looks funky in the App
+- Lots of warnings about components unmounting/mounting in the App 
+- No access to the app on the private side of the Appstore connect, only access to the testflights (will be an issue since they expire)
 
 # Useful Resources
 
