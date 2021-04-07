@@ -5,7 +5,7 @@ Spring 2021 Group - We split the teams into two:
 
 App Dev Team:
 - Sarah Pham (256-702-7184)
-- Chase Dumbacher
+- Chase Dumbacher (256-374-5621)
 
 Web Dev Team:
 - Austin Mongold
