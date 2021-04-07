@@ -2,6 +2,7 @@ Hello! This is the repository for COMP 4710: Senior Design Project in the Spring
 We are working on a booking system for Music Matters, located in Montgomery, AL.
 
 Spring 2021 Group - We split the teams into two:
+
 App Dev Team:
 - Sarah Pham (256-702-7184)
 - Chase Dumbacher
