@@ -82,7 +82,6 @@ This will get the app on TestFlight for all linked testers to test.
 
 # Known Issues and Wanted Functionality
 
-- Possible Android Tablet or iPad Functionality
 - Ability to pull up calender on PC from firebase
 - Language in artist's confirmation shown is not for The Renaissance/Exchange...It is for another venue ( This is from Fall 2020 group, didn't see this issue - Sarah Spring 2021)
 - Many deprecated dependencies and sdks in the App code (May cause issues in the future)
