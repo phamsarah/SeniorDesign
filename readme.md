@@ -76,11 +76,9 @@ This will get the app on TestFlight for all linked testers to test.
 # Known Issues and Wanted Functionality
 
 - Ability to pull up calender on PC from firebase
-- Language in artist's confirmation shown is not for The Renaissance/Exchange...It is for another venue ( This is from Fall 2020 group, didn't see this issue - Sarah Spring 2021)
 - Many deprecated dependencies and sdks in the App code (May cause issues in the future)
-- Editing the date/time when clicking on a certain person looks funky in the App
+- Editing the date/time when clicking on a certain person looks funky in the App (Problem with "react-native-modal-datetime-picker" library)
 - Lots of warnings about components unmounting/mounting in the App 
-- No access to the app on the private side of the Appstore connect, only access to the testflights (will be an issue since they expire)
 
 # Useful Resources
 - App Code Documentation
