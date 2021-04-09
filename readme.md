@@ -34,16 +34,9 @@ Got everything installed? Good! There's a few more steps to make sure everything
 1. Clone this repository. I'm sure you know how to do this if you're on GitHub, and if not, guides are a mere Google search away.
 2. Navigate to the cloned repository in command line. Again, you know how to do this.
 3. Run `npm install`. This will install all the relevant Node modules.
-   ```
-   {
-       apiKey: <your api key here>
-   }
-   ```
-4. Create a file named `auth.json` in the root project folder, and enter the code shown above, alongside the API key.
-   This will allow you to access the database to be able to retrieve information from it and write to it. \* **_UNDER NO CIRCUMSTANCES SHOULD YOU EVER ADD THIS FILE TO YOUR REPOSITORY_** (or post it anywhere public).
-5. Run `expo start`. This will get everything running to be able to access the app from your phone.
-6. Code to your heart's content using your preferred text editor.
-7. When you're ready to compile everything into an app, hit Ctrl+C and enter `expo build:ios` or `expo build:android`.
+4. Run `expo start`. This will get everything running to be able to access the app from your phone.
+5. Code to your heart's content using your preferred text editor.
+6. When you're ready to compile everything into an app, hit Ctrl+C and enter `expo build:ios` or `expo build:android`.
    _ For Android, it'll ask if you want to include your own certificate.
    If you have one, feel free to use it, or just let Expo do their own thing.
    _ For iOS, you'll need to log into an Apple Developer account that is enrolled in the Apple Development Program, which costs \$99/year. Sorry man, Apple cares far too much about security (and your money) to get around that cost.
