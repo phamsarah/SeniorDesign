@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\MusicMattersApp",
-    "\\MusicMattersApp\\components"
+    "\\MusicMattersApp\\functions"
   ],
-  "SelectedNode": "\\MusicMattersApp\\components\\TimeInput.js",
+  "SelectedNode": "\\MusicMattersApp\\functions\\index.js",
   "PreviewInSolutionExplorer": false
 }
