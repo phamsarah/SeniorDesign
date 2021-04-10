@@ -17,6 +17,13 @@ Fall 2020's Group 4 Repo: https://github.com/jphong1111/Senior_Project_Team_Cycl
 
 Welcome! Here, I'll give some assistance on how you can get everything up and running.
 
+# Useful Resources
+- App Code Documentation
+  - This is a useful walk through of various issues we fixed and ran into and how we fixed them
+- Readme.txt in MusicMattersApp
+  - This list various specific packages/libaries used in the app documentation as well as links to documentation
+- Cycle 3 Report
+  - This is the final revision of our cycle report and is a decent place to find diagrams and descriptions of things we worked on.
 
 # Requirements
 
@@ -82,7 +89,3 @@ This will get the app on TestFlight for all linked testers to test.
 - Mike wants location displayed underneath artist name on a calendar pdf.
 - Mike wants to remove AM/PM from the times shown on calendar pdf. (May prove slightly difficult ask if required)
 - Confirmation and (Possibly) Invoices are suppose to be sent out on the 20th of the previous month for the next month. Currently (I believe) this sends out the current month on the 20th of said month.
-
-# Useful Resources
-- App Code Documentation
-- Readme.txt in MusicMattersApp
