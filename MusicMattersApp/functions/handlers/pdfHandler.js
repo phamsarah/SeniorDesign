@@ -55,13 +55,14 @@ function generateCalendarTable(startDate, events) {
 
     matchingEvents.forEach((event, i) => {
       cellArray.push({
+        text: event.client.stage,
+        style: 'dateTimeslot', //Note for some reason using dateClient although the same format doesn't center
+      });
+      cellArray.push({
         text: Util.toAMPM(event.start) + ' to ' + Util.toAMPM(event.end),
         style: 'dateTimeslot',
       });
-      cellArray.push({
-        text: event.client.stage,
-        style: 'dateClient',
-      });
+
     });
 
     //add new date box to most recent week added
@@ -485,10 +486,14 @@ const pdfStyles = {
   dateTimeslot: {
     fontSize: 11,
     bold: true,
+    alignment: 'center',
     margin: [0, 10, 0, 0],
   },
   dateClient: {
-    fontSize: 10,
+    fontSize: 11,
+    bold: true,
+    alignmnet: 'center',
+    margin: [0, 10, 0, 0],
   },
   columnHeader: {
     fontSize: 22,

@@ -52,7 +52,7 @@ exports.sendForm = function(data, pdf, type){
             monthText = Util.monthEnum(data[2] - 1);
             emailSubject = "Booking Calendar - " + monthText + " " + data[3];
             recipient = [data[1].email, data[1].emaillist];
-            fileName = "Booking Calendar " + monthText + " " + year + ".pdf";
+            fileName = "Booking Calendar " + monthText + " " + data[3] + ".pdf";
         }
         else{
             monthText = Util.monthEnum(data[2] - 1);

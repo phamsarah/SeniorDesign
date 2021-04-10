@@ -418,7 +418,7 @@ const generateBookingOrCalendar = function(events, venue, month, year, type) {
 
         var data = [ events, venue, month, year ]
         return Promise.all([
-            Email.sendForm(data, type), 
+            Email.sendForm(data, pdf, type), 
             Drive.uploadBookingList(month, year, venue, pdf)
         ]).then(pdfs => {
             if(type == 'Booking')
