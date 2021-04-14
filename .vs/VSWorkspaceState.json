@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\MusicMattersApp",
-    "\\MusicMattersApp\\functions"
+    "\\MusicMattersApp\\functions",
+    "\\MusicMattersApp\\functions\\handlers"
   ],
-  "SelectedNode": "\\MusicMattersApp\\functions\\index.js",
+  "SelectedNode": "\\MusicMattersApp\\functions\\package.json",
   "PreviewInSolutionExplorer": false
 }
