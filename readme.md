@@ -86,6 +86,6 @@ This will get the app on TestFlight for all linked testers to test.
 - Many deprecated dependencies and sdks in the App code (May cause issues in the future)
 - Editing the date/time when clicking on a certain person looks funky in the App (Problem with "react-native-modal-datetime-picker" library)
 - Lots of warnings about components unmounting/mounting in the App 
-- Mike wants location displayed underneath artist name on a calendar pdf.
+- Mike wants Stage location (e.g house restaurant) displayed underneath artist name on a calendar pdf.
 - Mike wants to remove AM/PM from the times shown on calendar pdf. (May prove slightly difficult ask if required)
 - Confirmation and (Possibly) Invoices are suppose to be sent out on the 20th of the previous month for the next month. Currently (I believe) this sends out the current month on the 20th of said month.
