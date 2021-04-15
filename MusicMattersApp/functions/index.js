@@ -372,13 +372,18 @@ const processEvents = function(venueID, month, year) {
  * client -> a Client object representing the client who will be performing at the event
  * venue -> a Venue object representing the venue where the event will be performed
  */
+
+// Currently there seems to be issues with GenSendSaveAll relating to the pdfs not being created right after the first one. 
+// This issue was noticed near the very end of cycle 3 and thus wasn't fixed, however it might be fixable by uncommenting the pdf2 lines
 const generateConfirmationOrInvoice = function(event, client, venue, type) {
     return new Promise((resolve, reject) => {
 
         if (type == 'Confirmation')
             pdf = PDF.generateArtistConfirmation(event, client, venue);
+            // pdf2 =  PDF.generateArtistConfirmation(event, client, venue);
         else 
             pdf = PDF.generateInvoice(event, client, venue);
+            // pdf2 = PDF.generateInvoice(event, client, venue);
 
         var data = [ event, client, venue ]
 
