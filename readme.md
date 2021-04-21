@@ -82,6 +82,7 @@ This will get the app on TestFlight for all linked testers to test.
 
 # Known Issues and Wanted Functionality
 
+- Unpause Firebase DocSendOut function on Cloud Scheduler (Current it is paused to avoid sending out unwanted emails to clients, details in Dev Manual)
 - Ability to pull up calender on PC from firebase
 - Many deprecated dependencies and sdks in the App code (May cause issues in the future)
 - Editing the date/time when clicking on a certain person looks funky in the App (Problem with "react-native-modal-datetime-picker" library)
